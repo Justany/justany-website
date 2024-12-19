@@ -1,7 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-white">
-    <!-- Header -->
-    <header class="fixed w-full bg-white z-50 py-4 px-6 border-b border-zinc-200 shadow-xs">
+  <!-- Header -->
+  <header class="fixed w-full bg-white/80 backdrop-blur-sm z-50 py-4 px-6 border-b border-zinc-200 shadow-xs">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
         <!-- Left side - Logo and Navigation -->
         <div class="flex items-center space-x-12">
@@ -57,7 +56,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="flex-grow">
+    <main class="min-h-screen">
       <router-view></router-view>
     </main>
 
@@ -77,7 +76,6 @@
         </div>
       </div>
     </footer>
-  </div>
 </template>
 
 <script>
