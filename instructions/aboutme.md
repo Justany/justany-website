@@ -45,11 +45,11 @@ Je crois fermement que la technologie peut être un levier puissant pour :
 ## ✨ Réalisations  
 
 ### Projets principaux  
-1. **Karriere** : Plateforme de recherche d’emploi avec gestion intuitive des candidatures et profils.  
+1. **Karriere** : Plateforme de recherche d'emploi avec gestion intuitive des candidatures et profils.  
 2. **Fournisseur** : Marketplace numérique facilitant l'achat et la vente de produits en ligne.  
-3. **Leaya** : Application pour la gestion des services à domicile et de la vie quotidienne.  
-4. **La Marine** : Plateforme de réservation et gestion d’appartements meublés.  
-5. **Zool Taxe** : Outil digital simplifié pour la déclaration et la gestion des taxes professionnelles.  
+3. **Leaya** : Application de rencontre entre professionnels, facilitant le networking et les opportunités professionnelles.  
+4. **La Marine** : Site web officiel de la Marine Nationale Congolaise, présentant ses activités et services.  
+5. **Zool Taxe Forex LS** : Plateforme de contrôle et de suivi des opérations d'une agence de transfert d'argent avec intégration de Western Union, Ria et autres services de transfert internationaux.  
 
 ---
 

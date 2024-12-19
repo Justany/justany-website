@@ -25,10 +25,15 @@ Le site personnel doit refléter la personnalité, les compétences et le parcou
 
 ## 3.3. Portfolio
 
-- **Liste des projets** : Projets réalisés avec descriptions et images.
-- **Affichage des projets** : Affichage sous forme de grille.
-- **Filtrage des projets** : Possibilité de filtrer les projets par type ou catégorie.
-- **Projets en cours** : Liste des projets en cours avec une brève description et leur état d'avancement.
+- **Liste des projets** : 
+  1. Karriere - Plateforme de recherche d'emploi
+  2. Fournisseur - Marketplace numérique
+  3. Leaya - Application de rencontre professionnelle
+  4. La Marine - Site web de la Marine Nationale Congolaise
+  5. Zool Taxe Forex LS - Plateforme de gestion des transferts d'argent
+- **Affichage des projets** : Affichage sous forme de grille avec images et descriptions détaillées
+- **Filtrage des projets** : Par catégorie (Web, Mobile, Enterprise)
+- **Projets en cours** : Section dédiée aux projets en développement
 
 ## 3.4. Services
 

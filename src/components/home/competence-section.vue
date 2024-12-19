@@ -34,7 +34,7 @@ const skills = ref<Skill[]>([
     color: 'green',
     gradientClass: 'from-green-500/5',
     items: [
-      { name: 'Node.js', icon: ['fab', 'node'], iconColor: '#339933' },
+      { name: 'Node/Express', icon: ['fab', 'node'], iconColor: '#339933' },
       { name: 'PHP/Laravel', icon: ['fab', 'php'], iconColor: '#777BB4' },
       { name: 'PostgreSQL', icon: ['fas', 'database'], iconColor: '#336791' },
       { name: 'GraphQL', icon: ['fas', 'project-diagram'], iconColor: '#E535AB' },
@@ -42,29 +42,55 @@ const skills = ref<Skill[]>([
     ]
   },
   {
-    name: 'Plateformes Cloud',
-    icon: ['fas', 'cloud'],
+    name: 'DevOps & Cloud',
+    icon: ['fas', 'server'],
     color: 'orange',
     gradientClass: 'from-orange-500/5',
+    items: [
+      { name: 'Docker', icon: ['fab', 'docker'], iconColor: '#2496ED' },
+      { name: 'AWS', icon: ['fab', 'aws'], iconColor: '#FF9900' },
+      { name: 'GCP', icon: ['fab', 'google'], iconColor: '#4285F4' },
+      { name: 'CI/CD', icon: ['fas', 'infinity'], iconColor: '#16A34A' },
+      { name: 'Linux/Nginx', icon: ['fab', 'linux'], iconColor: '#FCC624' }
+    ]
+  },
+  {
+    name: 'Plateformes',
+    icon: ['fas', 'cloud'],
+    color: 'purple',
+    gradientClass: 'from-purple-500/5',
     items: [
       { name: 'Firebase', icon: ['fas', 'fire'], iconColor: '#FFCA28' },
       { name: 'Vercel', icon: ['fas', 'server'], iconColor: '#000000' },
       { name: 'Supabase', icon: ['fas', 'database'], iconColor: '#3ECF8E' },
-      { name: 'GCP', icon: ['fab', 'google'], iconColor: '#4285F4' },
-      { name: 'AWS', icon: ['fab', 'aws'], iconColor: '#FF9900' }
+      { name: 'Heroku', icon: ['fas', 'cloud-upload'], iconColor: '#430098' },
+      { name: 'DigitalOcean', icon: ['fas', 'water'], iconColor: '#0080FF' }
     ]
   },
   {
-    name: 'Marketing & Design',
-    icon: ['fas', 'palette'],
-    color: 'indigo',
-    gradientClass: 'from-indigo-500/5',
+    name: 'Marketing Digital',
+    icon: ['fas', 'bullhorn'],
+    color: 'rose',
+    gradientClass: 'from-rose-500/5',
     items: [
       { name: 'Google Ads', icon: ['fab', 'google'], iconColor: '#4285F4' },
       { name: 'Meta Ads', icon: ['fab', 'facebook'], iconColor: '#1877F2' },
       { name: 'TikTok Ads', icon: ['fab', 'tiktok'], iconColor: '#000000' },
+      { name: 'Analytics', icon: ['fas', 'chart-line'], iconColor: '#E37400' },
+      { name: 'SEO', icon: ['fas', 'search'], iconColor: '#47A248' }
+    ]
+  },
+  {
+    name: 'Design & IA',
+    icon: ['fas', 'wand-magic-sparkles'],
+    color: 'indigo',
+    gradientClass: 'from-indigo-500/5',
+    items: [
       { name: 'Figma', icon: ['fab', 'figma'], iconColor: '#F24E1E' },
-      { name: 'Adobe Suite', icon: ['fab', 'adobe'], iconColor: '#FF0000' }
+      { name: 'Adobe Suite', icon: ['fab', 'adobe'], iconColor: '#FF0000' },
+      { name: 'ChatGPT', icon: ['fas', 'robot'], iconColor: '#19C37D' },
+      { name: 'Copilot', icon: ['fab', 'github'], iconColor: '#000000' },
+      { name: 'Kaggle', icon: ['fas', 'chart-simple'], iconColor: '#20BEFF' }
     ]
   }
 ])
@@ -82,7 +108,7 @@ const skills = ref<Skill[]>([
       <div class="text-left mb-16">
         <h2 class="text-4xl font-bold bg-gradient-to-r from-zinc-800 to-zinc-500 inline-block text-transparent bg-clip-text">
           Outils & Technologies</h2>
-        <p class="mt-4 text-zinc-600">Une stack technique complète pour des solutions sur mesure</p>
+        <p class="mt-4 text-zinc-600">Une stack technique complète pour des solutions innovantes</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -101,6 +127,8 @@ const skills = ref<Skill[]>([
                        'from-green-400 to-green-600': skill.color === 'green',
                        'from-orange-400 to-orange-600': skill.color === 'orange',
                        'from-indigo-400 to-indigo-600': skill.color === 'indigo',
+                       'from-purple-400 to-purple-600': skill.color === 'purple',
+                       'from-rose-400 to-rose-600': skill.color === 'rose',
                      }">
                   <font-icon :icon="skill.icon" class="w-6 h-6 text-white" />
                 </div>

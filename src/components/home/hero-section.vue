@@ -10,7 +10,6 @@
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
-            <div class="line"></div>
         </div>
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <!-- Profile Image -->

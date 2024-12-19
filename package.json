@@ -15,6 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@heroicons/vue": "^2.2.0",
     "chart.js": "^4.4.7",
     "pinia": "^2.3.0",
     "vue": "^3.5.13",
