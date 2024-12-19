@@ -19,7 +19,7 @@
             </div>
 
             <!-- Title and Description -->
-            <h1 class="max-w-2xl text-5xl font-bold bg-gradient-to-r from-zinc-800 to-zinc-400 inline-block text-transparent bg-clip-text mb-6">
+            <h1 class="max-w-2xl text-5xl font-bold bg-gradient-to-r from-zinc-800 to-zinc-500 inline-block text-transparent bg-clip-text mb-6">
                 Software designer, founder, and amateur astronaut.
             </h1>
 
