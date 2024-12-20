@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint ."
   },
   "dependencies": {
     "@fortawesome/duotone-thin-svg-icons": "^6.7.1",
@@ -26,12 +28,22 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@types/cors": "^2.8.17",
     "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/language-server": "^2.1.10",
+    "@vue/typescript-plugin": "^2.1.10",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.14.0",
     "postcss": "^8.4.49",
     "postcss-import": "^16.1.0",
     "sharp": "^0.33.5",
@@ -41,6 +53,9 @@
     "vite": "^6.0.3",
     "vite-plugin-browser-sync": "^4.0.0",
     "vite-plugin-image-optimizer": "^1.1.8",
+    "vite-plugin-vue-component-preview": "^1.1.7",
+    "vue-component-meta": "^2.1.10",
+    "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.10"
   }
 }

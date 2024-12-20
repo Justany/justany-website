@@ -50,9 +50,9 @@ const availableSubCategories = computed(() => {
         <!-- Main Categories -->
         <div class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 mb-8">
           <button v-for="category in mainCategories" :key="category"
-            @click="selectedMainCategory = category; selectedSubCategory = 'Tous'"
             class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all group relative"
-            :class="[selectedMainCategory === category ? 'bg-orange-500 text-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700']">
+            :class="[selectedMainCategory === category ? 'bg-orange-500 text-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700']"
+            @click="selectedMainCategory = category; selectedSubCategory = 'Tous'">
             <span v-html="categoryIcons[category]"></span>
             <span class="absolute -bottom-5 sm:-bottom-6 text-xs sm:text-sm whitespace-nowrap"
               :class="[selectedMainCategory === category ? 'text-orange-500' : 'text-zinc-500']">
@@ -64,9 +64,9 @@ const availableSubCategories = computed(() => {
         <!-- Sub Categories -->
         <div v-if="selectedMainCategory !== 'Tous'"
           class="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 transition-all duration-300">
-          <button v-for="subCat in availableSubCategories" :key="subCat" @click="selectedSubCategory = subCat"
-            class="mt-6 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all"
-            :class="[selectedSubCategory === subCat ? 'bg-orange-500/20 text-orange-500' : 'bg-zinc-800/50 text-zinc-500 hover:bg-zinc-700/50']">
+          <button v-for="subCat in availableSubCategories" :key="subCat" class="mt-6 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all"
+            :class="[selectedSubCategory === subCat ? 'bg-orange-500/20 text-orange-500' : 'bg-zinc-800/50 text-zinc-500 hover:bg-zinc-700/50']"
+            @click="selectedSubCategory = subCat">
             <span v-html="subCategoryIcons[subCat]"></span>
             <span>{{ subCat }}</span>
           </button>

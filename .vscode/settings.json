@@ -1,0 +1,26 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "volar.autoCompleteRefs": true,
+  "volar.codeLens.scriptSetupTools": true,
+  "volar.completion.preferredTagNameCase": "pascal",
+  "volar.completion.preferredAttrNameCase": "kebab",
+  "volar.takeOverMode.enabled": true,
+  "volar.icon.preview": true,
+  "volar.preview.backgroundColor": "#fff",
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ]
+}

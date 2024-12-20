@@ -46,8 +46,8 @@ const scrollToPricing = () => {
 
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <div v-for="service in services" :key="service.id"
-          :id="service.title.toLowerCase().replace(/ /g, '-')"
+        <div v-for="service in services" :id="service.title.toLowerCase().replace(/ /g, '-')"
+          :key="service.id"
           class="group relative p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-opacity-50 transition-all duration-300 overflow-hidden cursor-pointer"
           @click="scrollToPricing">
           <!-- Gradient Background -->

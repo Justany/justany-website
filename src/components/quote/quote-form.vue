@@ -30,7 +30,7 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="submitForm" class="space-y-8">
+  <form class="space-y-8" @submit.prevent="submitForm">
     <!-- Services Selection -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="space-y-4">
@@ -86,8 +86,8 @@ const submitForm = async () => {
         <label class="block">
           <span class="text-zinc-700 font-medium">Date de Démarrage Souhaitée</span>
           <input 
-            type="date" 
-            v-model="formData.startDate"
+            v-model="formData.startDate" 
+            type="date"
             class="mt-1 block w-full px-4 py-2 rounded-full bg-white border border-zinc-300 focus:border-black focus:ring-black"
             required
           >
@@ -98,8 +98,8 @@ const submitForm = async () => {
         <label class="block">
           <span class="text-zinc-700 font-medium">Nom Complet</span>
           <input 
-            type="text" 
-            v-model="formData.fullName"
+            v-model="formData.fullName" 
+            type="text"
             class="mt-1 block w-full px-4 py-2 rounded-full bg-white border border-zinc-300 focus:border-black focus:ring-black"
             required
           >
@@ -108,8 +108,8 @@ const submitForm = async () => {
         <label class="block">
           <span class="text-zinc-700 font-medium">Email</span>
           <input 
-            type="email" 
-            v-model="formData.email"
+            v-model="formData.email" 
+            type="email"
             class="mt-1 block w-full px-4 py-2 rounded-full bg-white border border-zinc-300 focus:border-black focus:ring-black"
             required
           >
@@ -118,8 +118,8 @@ const submitForm = async () => {
         <label class="block">
           <span class="text-zinc-700 font-medium">Téléphone</span>
           <input 
-            type="tel" 
-            v-model="formData.phone"
+            v-model="formData.phone" 
+            type="tel"
             class="mt-1 block w-full px-4 py-2 rounded-full bg-white border border-zinc-300 focus:border-black focus:ring-black"
             required
           >
@@ -128,8 +128,8 @@ const submitForm = async () => {
         <label class="block">
           <span class="text-zinc-700 font-medium">Entreprise</span>
           <input 
-            type="text" 
-            v-model="formData.company"
+            v-model="formData.company" 
+            type="text"
             class="mt-1 block w-full px-4 py-2 rounded-full bg-white border border-zinc-300 focus:border-black focus:ring-black"
           >
         </label>
@@ -159,10 +159,10 @@ const submitForm = async () => {
     </div>
 
     <!-- Submit Button -->
-    <div class="flex justify-end">
+    <div class="flex justify-center md:justify-end">
       <button
         type="submit"
-        class="px-8 py-3 bg-black text-white rounded-full hover:bg-zinc-800 transition-colors flex items-center space-x-2"
+        class="w-full md:w-fit justify-center px-8 py-3 bg-black text-white rounded-full hover:bg-zinc-800 transition-colors flex items-center space-x-2"
       >
         <span>Envoyer la demande</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

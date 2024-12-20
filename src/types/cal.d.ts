@@ -1,9 +1,9 @@
 // Type declaration for Cal.com integration
 interface Window {
   Cal?: {
-    q?: any[];
-    ns?: Record<string, any>;
+    q?: unknown[];
+    ns?: Record<string, unknown>;
     loaded?: boolean;
-    (...args: any[]): void;
+    (...args: unknown[]): void;
   }
 }

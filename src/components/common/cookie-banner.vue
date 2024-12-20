@@ -46,14 +46,14 @@ onMounted(() => {
           </div>
           <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
             <button
-              @click="declineCookies"
               class="px-6 py-2 text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-full transition-colors"
+              @click="declineCookies"
             >
               Refuser
             </button>
             <button
-              @click="acceptCookies"
               class="px-6 py-2 text-white bg-black hover:bg-zinc-800 rounded-full transition-colors"
+              @click="acceptCookies"
             >
               Accepter
             </button>

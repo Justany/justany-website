@@ -13,8 +13,8 @@ const duration = props.bookingType === 'free' ? 'justany-itoua/15min' : 'justany
 const eventSlug = props.bookingType === 'free' ? 'justany-itoua/15min' : 'justany-itoua/60min'
 
 onMounted(() => {
-  (function (C: any, A: any, L: any) {
-    let p = function (a: any, ar: any) { a.q.push(ar); };
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
     let d = C.document;
     C.Cal = C.Cal || function () {
       let cal = C.Cal;
@@ -28,11 +28,11 @@ onMounted(() => {
       if (ar[0] === L) {
         interface CalApi {
           (): void;
-          q: any[];
+          q: unknown[];
         }
         const api: CalApi = function () { p(api, arguments); } as CalApi;
         const namespace = ar[1];
-        api.q = [] as any[];
+        api.q = [] as never[];
         if (typeof namespace === "string") {
           cal.ns[namespace] = cal.ns[namespace] || api;
           p(cal.ns[namespace], ar);
@@ -64,6 +64,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

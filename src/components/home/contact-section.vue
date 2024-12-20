@@ -66,19 +66,19 @@
           <form class="space-y-6">
             <div>
               <label for="name" class="block text-sm font-medium text-zinc-700">Nom complet</label>
-              <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+              <input id="name" type="text" name="name" class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
             </div>
 
             <div>
               <label for="email" class="block text-sm font-medium text-zinc-700">Email</label>
-              <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+              <input id="email" type="email" name="email" class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
             </div>
 
             <div>
               <label for="project_type" class="block text-sm font-medium text-zinc-700">Type de projet</label>
               <select 
-                v-model="projectType"
-                id="project_type" 
+                id="project_type"
+                v-model="projectType" 
                 name="project_type" 
                 class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
               >
@@ -94,8 +94,8 @@
             <div v-if="projectType === 'other'">
               <label for="subject" class="block text-sm font-medium text-zinc-700">Objet</label>
               <input 
-                type="text" 
                 id="subject" 
+                type="text" 
                 name="subject" 
                 class="mt-1 block w-full rounded-md border-zinc-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" 
                 placeholder="Ex: Développement d'une application e-commerce"
