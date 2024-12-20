@@ -6,7 +6,7 @@ const activeTab = ref('services') // 'services' or 'packs'
 </script>
 
 <template>
-  <section class="relative px-6 py-24 bg-white border-t border-zinc-200">
+  <section id="pricing" class="relative px-6 py-24 bg-white border-t border-zinc-200">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center md:text-left mb-16">
@@ -19,10 +19,10 @@ const activeTab = ref('services') // 'services' or 'packs'
       <!-- Consultation Options -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         <!-- Discovery Call -->
-        <div class="p-8 rounded-xl bg-orange-50/10 border border-orange-200">
+        <div class="p-8 rounded-xl bg-white border border-zinc-200">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h3 class="text-xl font-bold text-zinc-900">Appel Découverte</h3>
-            <div class="mt-2 sm:mt-0 px-3 py-1 rounded-full w-content bg-orange-100 text-orange-700 text-sm whitespace-nowrap">
+            <div class="mt-2 sm:mt-0 px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-sm whitespace-nowrap">
               {{ consultationOptions.discovery.duration }}
             </div>
           </div>
@@ -30,7 +30,7 @@ const activeTab = ref('services') // 'services' or 'packs'
           <div class="mt-4">
             <span class="text-2xl font-bold text-zinc-900">{{ consultationOptions.discovery.price }}</span>
           </div>
-          <button class="mt-6 w-full py-3 px-6 rounded-full bg-orange-600 text-white font-medium hover:bg-orange-700 transition-colors">
+          <button class="mt-6 w-full py-3 px-6 rounded-full bg-zinc-900 text-white font-medium hover:bg-zinc-800 transition-colors">
             Réserver un appel
           </button>
         </div>
@@ -62,39 +62,72 @@ const activeTab = ref('services') // 'services' or 'packs'
             class="px-6 py-3 text-sm font-medium transition-colors relative"
             :class="activeTab === 'services' ? 'text-orange-600' : 'text-zinc-600 hover:text-zinc-900'">
             Prix par Service
-            <div v-if="activeTab === 'services'" class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-orange-600 to-orange-400"></div>
+            <div v-if="activeTab === 'services'" class="absolute bottom-0 left-0 w-full h-0.5 bg-orange-600"></div>
           </button>
           <button 
             @click="activeTab = 'packs'"
             class="px-6 py-3 text-sm font-medium transition-colors relative"
-            :class="activeTab === 'packs' ? 'text-orange-600' : 'text-zinc-600 hover:text-zinc-900'">
+            :class="activeTab === 'packs' ? 'text-zinc-900' : 'text-zinc-600 hover:text-zinc-900'">
             Packs Solutions
-            <div v-if="activeTab === 'packs'" class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-orange-600 to-orange-400"></div>
+            <div v-if="activeTab === 'packs'" class="absolute bottom-0 left-0 w-full h-0.5 bg-zinc-900"></div>
           </button>
         </div>
       </div>
 
       <!-- Service Rates -->
-      <div v-show="activeTab === 'services'" class="grid grid-cols-1 gap-6">
+      <div v-show="activeTab === 'services'" class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div v-for="rate in serviceRates" :key="rate.id"
-          class="p-6 rounded-xl bg-white border border-zinc-200 hover:border-orange-500/50 transition-colors flex items-center justify-between group">
-          <div class="flex-1">
-            <div class="flex items-center">
-              <h4 class="text-xl font-semibold text-zinc-900">{{ rate.service }}</h4>
-              <div class="ml-4 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm">
-                {{ rate.unit }}
+          class="group relative p-8 rounded-2xl bg-white border border-zinc-200 hover:border-orange-500/50 transition-all duration-300">
+          <!-- Gradient Background -->
+          <div class="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-500/0 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500"></div>
+          
+          <!-- Content -->
+          <div class="relative">
+            <!-- Service Icon & Title -->
+            <div class="flex items-start justify-between mb-6">
+              <div class="flex-1">
+                <div class="flex items-center space-x-3 mb-2">
+                  <h4 class="text-xl font-semibold text-zinc-900">{{ rate.service }}</h4>
+                  <div class="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 text-sm font-medium">
+                    {{ rate.unit }}
+                  </div>
+                </div>
+                <p class="text-zinc-600">{{ rate.description }}</p>
               </div>
             </div>
-            <p class="mt-2 text-zinc-600">{{ rate.description }}</p>
-          </div>
-          <div class="text-right">
-            <div class="text-2xl font-bold text-zinc-900">{{ rate.startingPrice }}</div>
-            <div class="text-sm text-zinc-500">Prix de base</div>
-          </div>
-          <div class="ml-8 text-zinc-400 group-hover:text-orange-500 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+
+            <!-- Price & Features -->
+            <div class="space-y-6">
+              <!-- Starting Price -->
+              <div class="flex items-end space-x-2">
+                <div class="text-3xl font-bold text-zinc-900">{{ rate.startingPrice }}</div>
+                <div class="text-sm text-zinc-500 mb-1">Prix de base</div>
+              </div>
+
+              <!-- Features List if available -->
+              <ul v-if="rate.features" class="space-y-3">
+                <li v-for="(feature, index) in rate.features" :key="index"
+                  class="flex items-center text-zinc-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ feature }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="mt-8 flex justify-center">
+              <router-link 
+                to="/devis" 
+                class="w-full justify-center inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-black hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+              >
+                Demander un devis
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -113,8 +146,8 @@ const activeTab = ref('services') // 'services' or 'packs'
             <!-- Popular/Premium Badge -->
             <div v-if="plan.popular || plan.name === 'Enterprise'"
               class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-6 py-1 rounded-full text-sm font-medium"
-              :class="plan.name === 'Enterprise' 
-                ? 'bg-zinc-950 text-white'
+              :class="plan.name === 'Enterprise' ? 
+                'bg-zinc-950 text-white'
                 : 'bg-gradient-to-r from-orange-600 to-orange-400 text-white'">
               {{ plan.name === 'Enterprise' ? 'Premium' : 'Populaire' }}
             </div>

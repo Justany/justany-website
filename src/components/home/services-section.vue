@@ -24,10 +24,17 @@ const getIconBgColor = (color: string) => {
   }
   return colors[color as keyof typeof colors] || 'bg-zinc-500/10 text-zinc-500'
 }
+
+const scrollToPricing = () => {
+  const pricingSection = document.getElementById('pricing')
+  if (pricingSection) {
+    pricingSection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
-  <section class="relative px-6 py-24 bg-zinc-950">
+  <section id="services" class="relative px-6 py-24 bg-zinc-950">
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center md:text-left mb-16">
@@ -40,7 +47,9 @@ const getIconBgColor = (color: string) => {
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         <div v-for="service in services" :key="service.id"
-          class="group relative p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 transition-all duration-300 overflow-hidden">
+          :id="service.title.toLowerCase().replace(/ /g, '-')"
+          class="group relative p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-opacity-50 transition-all duration-300 overflow-hidden cursor-pointer"
+          @click="scrollToPricing">
           <!-- Gradient Background -->
           <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             :class="getGradientStyle(service.color)"></div>
@@ -69,10 +78,20 @@ const getIconBgColor = (color: string) => {
                 {{ feature }}
               </li>
             </ul>
+
+            <!-- CTA Button -->
+            <button 
+              class="mt-6 w-full py-2 px-4 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-opacity-80 transition-colors flex items-center justify-center group-hover:bg-opacity-100"
+              :class="'group-hover:bg-' + service.color + '-500 group-hover:text-white'"
+            >
+              Voir les tarifs
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
-
 </template>

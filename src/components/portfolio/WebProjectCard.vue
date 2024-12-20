@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 import type { Project } from '@/types/project'
 
 const props = defineProps<{

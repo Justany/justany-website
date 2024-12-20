@@ -19,6 +19,7 @@ export type ServiceRate = {
   startingPrice: string;
   unit: string;
   description: string;
+  features?: string[];
 }
 
 export const serviceRates: ServiceRate[] = [
@@ -27,35 +28,78 @@ export const serviceRates: ServiceRate[] = [
     service: 'Design Graphique',
     startingPrice: '150 000 FCFA',
     unit: 'par projet',
-    description: 'Logo, charte graphique, supports marketing'
+    description: 'Logo, charte graphique, supports marketing',
+    features: [
+      'Logo vectoriel & déclinaisons',
+      'Charte graphique complète',
+      'Supports marketing de base',
+      'Fichiers sources inclus'
+    ]
   },
   {
     id: 2,
     service: 'Développement Web',
     startingPrice: '450 000 FCFA',
     unit: 'par site',
-    description: 'Sites vitrines, e-commerce, applications web'
+    description: 'Sites vitrines, e-commerce, applications web',
+    features: [
+      'Design responsive moderne',
+      'Optimisation SEO de base',
+      'Hébergement première année',
+      'Formation utilisation'
+    ]
   },
   {
     id: 3,
     service: 'Applications Mobile',
     startingPrice: '850 000 FCFA',
     unit: 'par app',
-    description: 'Applications iOS et Android'
+    description: 'Applications iOS et Android',
+    features: [
+      'Design UI/UX natif',
+      'Publication sur les stores',
+      'Backend & API inclus',
+      'Support 6 mois'
+    ]
   },
   {
     id: 4,
     service: 'Marketing Digital',
     startingPrice: '250 000 FCFA',
     unit: 'par mois',
-    description: 'SEO, publicité, réseaux sociaux'
+    description: 'SEO, publicité, réseaux sociaux',
+    features: [
+      'Stratégie personnalisée',
+      'Gestion des réseaux sociaux',
+      'Rapports mensuels',
+      'Support dédié'
+    ]
   },
   {
     id: 5,
     service: 'Solutions IA',
     startingPrice: '750 000 FCFA',
     unit: 'par projet',
-    description: 'Chatbots, automatisation, analyse de données'
+    description: 'Chatbots, automatisation, analyse de données',
+    features: [
+      'Analyse des besoins',
+      'Développement sur mesure',
+      'Intégration & Tests',
+      'Documentation complète'
+    ]
+  },
+  {
+    id: 6,
+    service: 'Formation',
+    startingPrice: '15 000 FCFA',
+    unit: 'par semaine',
+    description: 'Formation personnalisée en développement',
+    features: [
+      'Support de cours inclus',
+      'Exercices pratiques',
+      'Suivi personnalisé',
+      'Attestation de formation'
+    ]
   }
 ]
 

@@ -40,10 +40,10 @@ const toggleMenu = () => {
         </a>
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex items-center space-x-8">
-          <a href="/playground" class="text-zinc-600 hover:text-black transition-colors">Playground</a>
-          <a href="/services" class="text-zinc-600 hover:text-black transition-colors">Services</a>
-          <a href="/case-studies" class="text-zinc-600 hover:text-black transition-colors">Case studies</a>
-          <a href="/about" class="text-zinc-600 hover:text-black transition-colors">About me</a>
+          <a href="#services" class="text-zinc-600 hover:text-black transition-colors">Services</a>
+          <a href="#pricing" class="text-zinc-600 hover:text-black transition-colors">Pricing</a>
+          <a href="#contact" class="text-zinc-600 hover:text-black transition-colors">Contact</a>
+          <a href="#about" class="text-zinc-600 hover:text-black transition-colors">About</a>
         </nav>
       </div>
 
@@ -96,17 +96,17 @@ const toggleMenu = () => {
       <div class="px-4 py-3 space-y-4">
         <!-- Mobile Navigation -->
         <nav class="space-y-2">
-          <a href="/playground" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            Playground
-          </a>
-          <a href="/services" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+          <a href="#services" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
             Services
           </a>
-          <a href="/case-studies" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            Case studies
+          <a href="#pricing" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+            Pricing
           </a>
-          <a href="/about" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            About me
+          <a href="#contact" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+            Contact
+          </a>
+          <a href="#about" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+            About
           </a>
         </nav>
 
