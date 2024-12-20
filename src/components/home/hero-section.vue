@@ -3,7 +3,7 @@
 
 <template>
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center relative hero-section">
+    <section id="hero" class="min-h-screen flex items-center relative hero-section pt-28 md:pt-0">
         <div class="animated-lines">
             <div class="line"></div>
             <div class="line"></div>
@@ -11,7 +11,7 @@
             <div class="line"></div>
             <div class="line"></div>
         </div>
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <!-- Profile Image -->
             <div class="w-24 h-24 rounded-full overflow-hidden mb-8">
                 <img src="https://avatars.githubusercontent.com/u/32221808?v=4" alt="Justany Itoua"
@@ -20,7 +20,7 @@
 
             <!-- Title and Description -->
             <h1 class="max-w-2xl text-5xl font-bold bg-gradient-to-r from-zinc-800 to-zinc-500 inline-block text-transparent bg-clip-text mb-6">
-                Entrepreneur, vendeur & Développeur Full Stack
+                Entrepreneur, Vendeur <br class="hidden md:inline" /> & Développeur Full Stack
             </h1>
 
             <p class="text-lg text-zinc-600 mb-8 max-w-2xl">
@@ -52,7 +52,7 @@
                 </a>
             </div>
 
-            <div class="mt-16">
+            <div class="mt-12">
                 <p class="font-display text-base text-zinc-900">Quelques projets réalisés</p>
                 <ul role="list"
                     class="mt-8 flex items-center justify-center gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0">

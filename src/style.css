@@ -8,7 +8,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 4rem; /* Pour compenser la hauteur du header */
+    /* padding-top: 5rem;  Pour compenser la hauteur du header */
 }
 
 .hero-content {

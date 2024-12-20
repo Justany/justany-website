@@ -40,15 +40,29 @@ const toggleMenu = () => {
         </a>
         <!-- Desktop Navigation -->
         <nav class="hidden lg:flex items-center space-x-8">
+          <a href="/" class="text-zinc-600 hover:text-black transition-colors">Accueil</a>
           <a href="#services" class="text-zinc-600 hover:text-black transition-colors">Services</a>
           <a href="#pricing" class="text-zinc-600 hover:text-black transition-colors">Pricing</a>
           <a href="#contact" class="text-zinc-600 hover:text-black transition-colors">Contact</a>
-          <a href="#about" class="text-zinc-600 hover:text-black transition-colors">About</a>
+          <a href="/about" class="text-zinc-600 hover:text-black transition-colors">About</a>
         </nav>
       </div>
 
       <!-- Right side - Time, Status and Social -->
       <div class="hidden lg:flex items-center space-x-6">
+        <div class="hidden xl:flex space-x-2">
+          <div class="flex items-center space-x-2 px-3 py-1 text-sm bg-zinc-100 rounded-full">
+            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+            <span>Disponible</span>
+          </div>
+        </div>
+        <a href="/devis" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full text-white bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200">
+          Demander un devis
+        </a>
+        <button
+          class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-zinc-900 transition-colors">
+          <PlusIcon class="w-5 h-5" />
+        </button>
         <div class="text-sm text-zinc-600 text-right">
           <div class="flex items-center justify-end space-x-1">
             <MapPinIcon class="w-4 h-4" />
@@ -56,31 +70,12 @@ const toggleMenu = () => {
           </div>
           <div>{{ currentTime }}</div>
         </div>
-        <div class="hidden xl:flex space-x-2">
-          <span class="px-3 py-1 text-sm bg-zinc-100 rounded-full">Available</span>
-          <span class="px-3 py-1 text-sm bg-zinc-100 rounded-full">Open to work</span>
-        </div>
-        <button
-          class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-zinc-900 transition-colors">
-          <PlusIcon class="w-5 h-5" />
-        </button>
-        <div class="flex items-center space-x-3">
-          <a href="https://instagram.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'instagram']" class="w-5 h-5" />
-          </a>
-          <a href="https://dribbble.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'dribbble']" class="w-5 h-5" />
-          </a>
-          <a href="https://twitter.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'x-twitter']" class="w-5 h-5" />
-          </a>
-        </div>
       </div>
 
       <!-- Mobile menu button -->
       <button 
         @click="toggleMenu"
-        class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-zinc-600 hover:text-black hover:bg-zinc-100"
+        class="lg:hidden p-2 text-zinc-600 hover:text-black transition-colors"
       >
         <span class="sr-only">Open menu</span>
         <Bars3Icon v-if="!isOpen" class="w-6 h-6" />
@@ -89,65 +84,94 @@ const toggleMenu = () => {
     </div>
 
     <!-- Mobile menu -->
-    <div 
-      v-show="isOpen" 
-      class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-zinc-200 shadow-lg"
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
-      <div class="px-4 py-3 space-y-4">
-        <!-- Mobile Navigation -->
-        <nav class="space-y-2">
-          <a href="#services" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            Services
-          </a>
-          <a href="#pricing" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            Pricing
-          </a>
-          <a href="#contact" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            Contact
-          </a>
-          <a href="#about" class="block px-3 py-2 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-            About
-          </a>
-        </nav>
+      <div
+        v-show="isOpen"
+        class="lg:hidden fixed inset-0 z-50"
+      >
+        <!-- Background overlay -->
+        <div class="fixed inset-0 bg-black/20 backdrop-blur-sm"></div>
 
-        <!-- Mobile Time and Status -->
-        <div class="px-3 py-2">
-          <div class="text-sm text-zinc-600">
-            <div class="flex items-center space-x-1">
-              <MapPinIcon class="w-4 h-4" />
-              <span>Brazzaville, Congo</span>
+        <!-- Menu panel -->
+        <Transition
+          enter-active-class="transition duration-300 ease-out"
+          enter-from-class="transform -translate-y-full"
+          enter-to-class="transform translate-y-0"
+          leave-active-class="transition duration-200 ease-in"
+          leave-from-class="transform translate-y-0"
+          leave-to-class="transform -translate-y-full"
+        >
+          <div v-show="isOpen" class="fixed top-0 bottom-0 w-full bg-white">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200">
+              <div class="w-8 h-8 bg-black rounded-xl flex items-center justify-center">
+                <span class="text-white text-sm font-medium">JI</span>
+              </div>
+              <button
+                @click="toggleMenu"
+                class="p-2 text-zinc-600 hover:text-black transition-colors"
+              >
+                <span class="sr-only">Close menu</span>
+                <XMarkIcon class="w-6 h-6" />
+              </button>
             </div>
-            <div>{{ currentTime }}</div>
-          </div>
-          <div class="flex space-x-2 mt-2">
-            <span class="px-3 py-1 text-sm bg-zinc-100 rounded-full">Available</span>
-            <span class="px-3 py-1 text-sm bg-zinc-100 rounded-full">Open to work</span>
-          </div>
-        </div>
 
-        <!-- Mobile Social Links -->
-        <div class="flex items-center space-x-4 px-3 py-2">
-          <a href="https://instagram.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'instagram']" class="w-5 h-5" />
-          </a>
-          <a href="https://dribbble.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'dribbble']" class="w-5 h-5" />
-          </a>
-          <a href="https://twitter.com" target="_blank" class="text-zinc-600 hover:text-black transition-colors">
-            <font-icon :icon="['fab', 'x-twitter']" class="w-5 h-5" />
-          </a>
-        </div>
+            <div class="bg-white px-6 py-8 space-y-8 shadow-lg border-b border-zinc-200">
+              <!-- Mobile Navigation -->
+              <nav class="space-y-3">
+                <a href="/" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+                  Accueil
+                </a>
+                <a href="#services" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+                  Services
+                </a>
+                <a href="#pricing" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+                  Pricing
+                </a>
+                <a href="#contact" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+                  Contact
+                </a>
+                <a href="/about" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
+                  About
+                </a>
+              </nav>
+
+              <!-- Mobile Status -->
+              <div class="space-y-6">
+                <div class="flex items-center space-x-2 px-4 py-1.5 text-sm bg-zinc-100 rounded-full w-fit mx-auto">
+                  <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <span>Disponible</span>
+                </div>
+
+                <a href="/devis" class="block text-center px-5 py-2.5 text-sm font-medium rounded-full text-white bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200">
+                  Demander un devis
+                </a>
+
+                <button
+                  class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-zinc-900 transition-colors mx-auto">
+                  <PlusIcon class="w-5 h-5" />
+                </button>
+
+                <div class="text-sm text-zinc-600 text-center">
+                  <div class="flex items-center justify-center space-x-1.5">
+                    <MapPinIcon class="w-4 h-4" />
+                    <span>Brazzaville, Congo</span>
+                  </div>
+                  <div class="mt-1">{{ currentTime }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Transition>
       </div>
-    </div>
+    </Transition>
+
   </header>
-
-  <!-- Spacer to prevent content from hiding under fixed navbar -->
-  <div class="h-20"></div>
+  
 </template>
-
-<style scoped>
-.backdrop-blur-sm {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-</style>
