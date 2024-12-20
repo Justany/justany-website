@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { serviceRates, pricingPlans } from '@/datas/pricing.datas'
+import { serviceRates, pricingPlans } from '@/data/pricing.datas'
 
 const formData = ref({
   fullName: '',
@@ -14,9 +14,6 @@ const formData = ref({
   startDate: '',
   additionalInfo: ''
 })
-
-const selectedService = ref('')
-const showCustomBudget = ref(false)
 
 const budgetRanges = [
   '100k - 500k FCFA',

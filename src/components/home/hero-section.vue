@@ -14,8 +14,15 @@
         <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <!-- Profile Image -->
             <div class="w-24 h-24 rounded-full overflow-hidden mb-8">
-                <img src="https://avatars.githubusercontent.com/u/32221808?v=4" alt="Justany Itoua"
-                    class="w-full h-full object-cover" />
+                <img 
+                    src="https://avatars.githubusercontent.com/u/32221808?v=4" 
+                    alt="Justany Itoua"
+                    width="128"
+                    height="128"
+                    class="rounded-full"
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
 
             <!-- Title and Description -->

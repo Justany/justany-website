@@ -3,11 +3,11 @@ import { ref, computed } from 'vue'
 import type { Project } from '@/types/project'
 import type { MainCategory, SubCategories } from '@/types/categories'
 import { mainCategories, subCategories } from '@/types/categories'
-import { categoryIcons, subCategoryIcons } from '@/datas/icons.datas'
+import { categoryIcons, subCategoryIcons } from '@/data/icons.datas'
 import WebProjectCard from '../portfolio/WebProjectCard.vue'
 import DesignProjectCard from '../portfolio/DesignProjectCard.vue'
 import AdsProjectCard from '../portfolio/AdsProjectCard.vue'
-import { allProjects } from '@/datas/projets.datas'
+import { allProjects } from '@/data/projets.datas'
 
 const selectedMainCategory = ref<MainCategory>('Tous')
 const selectedSubCategory = ref<string>('Tous')

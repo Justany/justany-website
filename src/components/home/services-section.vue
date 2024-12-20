@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { services } from '@/datas/services.datas'
+import { services } from '@/data/services.datas'
 
 const getGradientStyle = (color: string) => {
   const colors = {

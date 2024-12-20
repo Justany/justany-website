@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { 
   Bars3Icon, 
   XMarkIcon,
-  PlusIcon,
+  PhoneIcon,
   MapPinIcon
 } from '@heroicons/vue/24/outline'
 
@@ -42,9 +42,10 @@ const toggleMenu = () => {
         <nav class="hidden lg:flex items-center space-x-8">
           <a href="/" class="text-zinc-600 hover:text-black transition-colors">Accueil</a>
           <a href="#services" class="text-zinc-600 hover:text-black transition-colors">Services</a>
-          <a href="#pricing" class="text-zinc-600 hover:text-black transition-colors">Pricing</a>
+          <a href="#pricing" class="text-zinc-600 hover:text-black transition-colors">Tarifs</a>
+          <a href="/blog" class="text-zinc-600 hover:text-black transition-colors">Blog</a>
           <a href="#contact" class="text-zinc-600 hover:text-black transition-colors">Contact</a>
-          <a href="/about" class="text-zinc-600 hover:text-black transition-colors">About</a>
+          <a href="/about" class="text-zinc-600 hover:text-black transition-colors">À propos</a>
         </nav>
       </div>
 
@@ -59,10 +60,10 @@ const toggleMenu = () => {
         <a href="/devis" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full text-white bg-zinc-900 hover:bg-zinc-800 transition-colors duration-200">
           Demander un devis
         </a>
-        <button
+        <a href="tel:+242053518256"
           class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-zinc-900 transition-colors">
-          <PlusIcon class="w-5 h-5" />
-        </button>
+          <PhoneIcon class="w-4 h-4" />
+        </a>
         <div class="text-sm text-zinc-600 text-right">
           <div class="flex items-center justify-end space-x-1">
             <MapPinIcon class="w-4 h-4" />
@@ -124,22 +125,13 @@ const toggleMenu = () => {
 
             <div class="bg-white px-6 py-8 space-y-8 shadow-lg border-b border-zinc-200">
               <!-- Mobile Navigation -->
-              <nav class="space-y-3">
-                <a href="/" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-                  Accueil
-                </a>
-                <a href="#services" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-                  Services
-                </a>
-                <a href="#pricing" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-                  Pricing
-                </a>
-                <a href="#contact" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-                  Contact
-                </a>
-                <a href="/about" class="block px-4 py-2.5 text-zinc-600 hover:text-black hover:bg-zinc-50 rounded-lg transition-colors">
-                  About
-                </a>
+              <nav class="flex flex-col space-y-8">
+                <a href="/" class="text-zinc-600 hover:text-black transition-colors text-lg">Accueil</a>
+                <a href="#services" class="text-zinc-600 hover:text-black transition-colors text-lg">Services</a>
+                <a href="#pricing" class="text-zinc-600 hover:text-black transition-colors text-lg">Tarifs</a>
+                <a href="/blog" class="text-zinc-600 hover:text-black transition-colors text-lg">Blog</a>
+                <a href="#contact" class="text-zinc-600 hover:text-black transition-colors text-lg">Contact</a>
+                <a href="/about" class="text-zinc-600 hover:text-black transition-colors text-lg">À propos</a>
               </nav>
 
               <!-- Mobile Status -->
@@ -153,10 +145,10 @@ const toggleMenu = () => {
                   Demander un devis
                 </a>
 
-                <button
+                <a href="tel:+242053518256"
                   class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-zinc-900 transition-colors mx-auto">
-                  <PlusIcon class="w-5 h-5" />
-                </button>
+                  <PhoneIcon class="w-4 h-4" />
+                </a>
 
                 <div class="text-sm text-zinc-600 text-center">
                   <div class="flex items-center justify-center space-x-1.5">

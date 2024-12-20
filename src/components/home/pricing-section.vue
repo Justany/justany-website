@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { pricingPlans, serviceRates, consultationOptions } from '@/datas/pricing.datas'
+import { pricingPlans, serviceRates, consultationOptions } from '@/data/pricing.datas'
 import { ref } from 'vue'
 
 const activeTab = ref('services') // 'services' or 'packs'

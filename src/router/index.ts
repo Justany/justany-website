@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Portfolio from '../views/Portfolio.vue'
 import Services from '../views/Services.vue'
-import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
 import Quote from '../views/Quote.vue'
 
@@ -32,7 +31,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/blog',
     name: 'blog',
-    component: Blog
+    component: () => import('../views/Blog.vue')
+  },
+  {
+    path: '/blog/:slug',
+    name: 'blog-content',
+    component: () => import('../views/BlogContent.vue')
   },
   {
     path: '/contact',

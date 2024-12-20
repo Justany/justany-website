@@ -87,7 +87,7 @@ const skills = ref<Skill[]>([
     gradientClass: 'from-indigo-500/5',
     items: [
       { name: 'Figma', icon: ['fab', 'figma'], iconColor: '#F24E1E' },
-      { name: 'Adobe Suite', icon: ['fab', 'adobe'], iconColor: '#FF0000' },
+      { name: 'Adobe Suite', icon: ['fas', 'image'], iconColor: '#FF0000' },
       { name: 'ChatGPT', icon: ['fas', 'robot'], iconColor: '#19C37D' },
       { name: 'Copilot', icon: ['fab', 'github'], iconColor: '#000000' },
       { name: 'Kaggle', icon: ['fas', 'chart-simple'], iconColor: '#20BEFF' }
