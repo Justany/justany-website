@@ -37,15 +37,13 @@ const availableSubCategories = computed(() => {
 </script>
 
 <template>
-  <section id="portfolio" class="relative px-6 py-24 bg-zinc-950">
+
+  <section id="portfolio" class="relative px-6 py-24 bg-zinc-950 border-t border-zinc-800">
 
     <div class="max-w-7xl mx-auto relative z-10">
       <div class="text-center md:text-left mb-16">
-        <h2
-          class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-200 inline-block text-transparent bg-clip-text">
-          Consulter mon travail
-        </h2>
-        <p class="text-zinc-400 mt-2">Une sélection de mes réalisations en développement, design et publicité.</p>
+        <h2 class="text-3xl font-bold text-zinc-100">Réalisations & Projets</h2>
+        <p class="mt-4 text-zinc-400 max-w-2xl">Découvrez une sélection de mes projets et réalisations dans le développement, le design et le marketing digital</p>
       </div>
       <!-- Category Filters -->
       <div class="mb-12">
