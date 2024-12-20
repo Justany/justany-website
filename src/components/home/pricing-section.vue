@@ -19,7 +19,7 @@ const activeTab = ref('services') // 'services' or 'packs'
       <!-- Consultation Options -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         <!-- Discovery Call -->
-        <div class="p-8 rounded-xl bg-orange-50 border border-orange-200">
+        <div class="p-8 rounded-xl bg-orange-50/10 border border-orange-200">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <h3 class="text-xl font-bold text-zinc-900">Appel Découverte</h3>
             <div class="mt-2 sm:mt-0 px-3 py-1 rounded-full w-content bg-orange-100 text-orange-700 text-sm whitespace-nowrap">
@@ -55,7 +55,7 @@ const activeTab = ref('services') // 'services' or 'packs'
       </div>
 
       <!-- Pricing Tabs -->
-      <div class="mb-8">
+      <div class="mb-14">
         <div class="flex justify-center space-x-4 border-b border-zinc-200">
           <button 
             @click="activeTab = 'services'"

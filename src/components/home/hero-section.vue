@@ -52,7 +52,7 @@
                 </a>
             </div>
 
-            <div class="mt-24">
+            <div class="mt-16">
                 <p class="font-display text-base text-zinc-900">Quelques projets réalisés</p>
                 <ul role="list"
                     class="mt-8 flex items-center justify-center gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0">
