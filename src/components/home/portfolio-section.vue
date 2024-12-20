@@ -1,79 +1,18 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Project } from '@/types/project'
+import type { MainCategory, SubCategories } from '@/types/categories'
+import { mainCategories, subCategories } from '@/types/categories'
+import { categoryIcons, subCategoryIcons } from '@/datas/icons.datas'
 import WebProjectCard from '../portfolio/WebProjectCard.vue'
 import DesignProjectCard from '../portfolio/DesignProjectCard.vue'
 import AdsProjectCard from '../portfolio/AdsProjectCard.vue'
-
-type MainCategory = 'Tous' | 'Web' | 'Design' | 'Ads'
-type SubCategories = {
-  Web: string[];
-  Design: string[];
-  Ads: string[];
-}
-
-const mainCategories: MainCategory[] = ['Tous', 'Web', 'Design', 'Ads']
-const subCategories: SubCategories = {
-  Web: ['Applications', 'Plateformes', 'Sites'],
-  Design: ['Logos', 'Affiches', 'Maquettes'],
-  Ads: ['Réseaux Sociaux', 'Google Ads', 'Performance']
-}
+import { allProjects } from '@/datas/projets.datas'
 
 const selectedMainCategory = ref<MainCategory>('Tous')
 const selectedSubCategory = ref<string>('Tous')
 
-const projects = ref<Project[]>([
-  // Web Projects
-  {
-    id: 1,
-    name: 'Karriere',
-    description: 'Plateforme de recherche d\'emploi avec gestion intuitive des candidatures.',
-    image: './img/projects/karriere.jpg',
-    mainCategory: 'Web',
-    subCategory: 'Plateformes',
-    link: 'https://karriere.cg',
-    tags: ['Vue.js', 'Laravel', 'PostgreSQL'],
-    features: [
-      'Gestion des profils candidats',
-      'Système de matching avancé',
-      'Tableau de bord analytique'
-    ]
-  },
-  // Design Projects - Logos
-  {
-    id: 8,
-    name: 'Logo Fournisseur',
-    description: 'Design du logo et de l\'identité visuelle de Fournisseur',
-    image: './img/logos/F logo 512 x 512 px.png',
-    mainCategory: 'Design',
-    subCategory: 'Logos',
-    tools: ['Illustrator', 'Photoshop'],
-    deliverables: [
-      'Logo principal',
-      'Variantes du logo',
-      'Guide d\'utilisation',
-      'Fichiers sources'
-    ]
-  },
-  // Ads Projects
-  {
-    id: 15,
-    name: 'Campagne E-commerce',
-    description: 'Campagne publicitaire pour une boutique en ligne',
-    mainCategory: 'Ads',
-    subCategory: 'Performance',
-    platform: 'Google Ads',
-    metrics: {
-      budget: '5000 €',
-      duration: '3 mois',
-      results: {
-        sales: '25000',
-        reach: '50000',
-        engagement: 15
-      }
-    }
-  }
-])
+const projects = ref<Project[]>(allProjects)
 
 // Computed property for filtered projects
 const filteredProjects = computed(() => {
@@ -95,69 +34,43 @@ const availableSubCategories = computed(() => {
   return ['Tous', ...subCategories[selectedMainCategory.value as keyof SubCategories]]
 })
 
-// Fonction pour générer un dégradé aléatoire
-const generateGradient = (name: string) => {
-  const colors = [
-    ['from-orange-400', 'via-rose-400', 'to-purple-500'],
-    ['from-blue-400', 'via-cyan-400', 'to-teal-500'],
-    ['from-green-400', 'via-emerald-400', 'to-teal-500'],
-    ['from-indigo-400', 'via-purple-400', 'to-pink-500'],
-    ['from-rose-400', 'via-orange-400', 'to-yellow-500']
-  ]
-  const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0)
-  return colors[hash % colors.length]
-}
-
-// Vérifier si une image existe
-const imageExists = ref(new Set())
-
-const checkImage = (src: string) => {
-  if (imageExists.value.has(src)) return true
-  const img = new Image()
-  img.onload = () => imageExists.value.add(src)
-  img.src = src
-  return imageExists.value.has(src)
-}
 </script>
 
 <template>
-  <section id="portfolio" class="relative px-6 py-24 bg-zinc-900">
-    <!-- Gradient de transition haut -->
-    <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-zinc-900 opacity-5"></div>
-
-    <!-- Gradient de transition bas -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-zinc-900 opacity-5"></div>
-
-    <!-- Background Pattern -->
-    <div class="absolute inset-0"
-      :style="{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(63 63 70 / 0.2) 1px, transparent 0)' }"
-      style="background-size: 40px 40px;"></div>
+  <section id="portfolio" class="relative px-6 py-24 bg-zinc-950">
 
     <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center md:text-left mb-16">
+        <h2
+          class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-200 inline-block text-transparent bg-clip-text">
+          Consulter mon travail
+        </h2>
+        <p class="text-zinc-400 mt-2">Une sélection de mes réalisations en développement, design et publicité.</p>
+      </div>
       <!-- Category Filters -->
       <div class="mb-12">
         <!-- Main Categories -->
-        <div class="flex flex-wrap gap-4 mb-6">
-          <button v-for="category in mainCategories" 
-                  :key="category"
-                  @click="selectedMainCategory = category; selectedSubCategory = 'Tous'"
-                  :class="['px-4 py-2 rounded-lg transition-all',
-                           selectedMainCategory === category 
-                             ? 'bg-orange-500 text-white' 
-                             : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700']">
-            {{ category }}
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 mb-8">
+          <button v-for="category in mainCategories" :key="category"
+            @click="selectedMainCategory = category; selectedSubCategory = 'Tous'"
+            class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all group relative"
+            :class="[selectedMainCategory === category ? 'bg-orange-500 text-white' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700']">
+            <span v-html="categoryIcons[category]"></span>
+            <span class="absolute -bottom-5 sm:-bottom-6 text-xs sm:text-sm whitespace-nowrap"
+              :class="[selectedMainCategory === category ? 'text-orange-500' : 'text-zinc-500']">
+              {{ category }}
+            </span>
           </button>
         </div>
-        
-        <!-- Sub Categories (shown only when main category is selected) -->
-        <div v-if="selectedMainCategory !== 'Tous'" class="flex flex-wrap gap-3">
-          <button v-for="subCat in availableSubCategories" :key="subCat"
-                  @click="selectedSubCategory = subCat"
-                  :class="['px-3 py-1 rounded-md text-sm transition-all',
-                           selectedSubCategory === subCat
-                             ? 'bg-orange-500/20 text-orange-500'
-                             : 'bg-zinc-800/50 text-zinc-500 hover:bg-zinc-700/50']">
-            {{ subCat }}
+
+        <!-- Sub Categories -->
+        <div v-if="selectedMainCategory !== 'Tous'"
+          class="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 transition-all duration-300">
+          <button v-for="subCat in availableSubCategories" :key="subCat" @click="selectedSubCategory = subCat"
+            class="mt-6 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all"
+            :class="[selectedSubCategory === subCat ? 'bg-orange-500/20 text-orange-500' : 'bg-zinc-800/50 text-zinc-500 hover:bg-zinc-700/50']">
+            <span v-html="subCategoryIcons[subCat]"></span>
+            <span>{{ subCat }}</span>
           </button>
         </div>
       </div>
@@ -172,12 +85,9 @@ const checkImage = (src: string) => {
       </div>
     </div>
   </section>
+
 </template>
 
 <style scoped>
-.bg-grid-white\/\[0\.02\] {
-  -webkit-mask-image: linear-gradient(to top, transparent, 50%, black);
-  mask-image: linear-gradient(to top, transparent, 50%, black);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.02)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-}
+
 </style>

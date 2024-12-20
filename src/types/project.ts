@@ -13,6 +13,7 @@ export interface Project {
   name: string;
   description: string;
   image?: string;
+  gallery?: string[];
   mainCategory: 'Web' | 'Design' | 'Ads';
   subCategory: string;
   link?: string;

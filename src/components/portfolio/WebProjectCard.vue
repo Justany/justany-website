@@ -1,19 +1,55 @@
+<script setup lang="ts">
+import { defineProps, ref } from 'vue'
+import type { Project } from '@/types/project'
+
+const props = defineProps<{
+  project: Project
+}>()
+
+// Fonction pour générer un dégradé aléatoire
+const generateGradient = (name: string) => {
+  const colors = [
+    ['from-orange-400', 'via-rose-400', 'to-purple-500'],
+    ['from-blue-400', 'via-cyan-400', 'to-teal-500'],
+    ['from-green-400', 'via-emerald-400', 'to-teal-500'],
+    ['from-indigo-400', 'via-purple-400', 'to-pink-500'],
+    ['from-rose-400', 'via-orange-400', 'to-yellow-500']
+  ]
+  const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0)
+  return colors[hash % colors.length]
+}
+
+// Vérifier si une image existe
+const imageExists = ref(new Set<string>())
+
+const checkImage = (src?: string) => {
+  if (!src) return false
+  if (imageExists.value.has(src)) return true
+  
+  const img = new Image()
+  img.onload = () => imageExists.value.add(src)
+  img.src = src
+  return imageExists.value.has(src)
+}
+</script>
+
+
 <template>
   <div class="group cursor-pointer">
     <div class="relative rounded-2xl bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 p-6 overflow-hidden transition-all duration-300 hover:border-orange-500/50">
       <!-- Background Glow -->
       <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-           :class="generateGradient(project.name)"></div>
+           :class="generateGradient(props.project.name)"></div>
       
       <div class="relative">
         <!-- Image/Fallback -->
         <div class="relative w-full rounded-xl overflow-hidden mb-6 aspect-video group-hover:scale-105 transition-transform duration-500">
-          <template v-if="checkImage(project.image)">
+          <template v-if="checkImage(props.project.image)">
             <img :src="project.image" :alt="project.name" class="w-full h-full object-cover">
           </template>
           <div v-else 
                class="w-full h-full flex items-center justify-center text-white text-2xl font-bold bg-gradient-to-br"
-               :class="generateGradient(project.name)">
+               :class="generateGradient(props.project.name)">
             {{ project.name }}
           </div>
         </div>
@@ -71,38 +107,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps, ref } from 'vue'
-import type { Project } from '@/types/project'
-
-const props = defineProps<{
-  project: Project
-}>()
-
-// Fonction pour générer un dégradé aléatoire
-const generateGradient = (name: string) => {
-  const colors = [
-    ['from-orange-400', 'via-rose-400', 'to-purple-500'],
-    ['from-blue-400', 'via-cyan-400', 'to-teal-500'],
-    ['from-green-400', 'via-emerald-400', 'to-teal-500'],
-    ['from-indigo-400', 'via-purple-400', 'to-pink-500'],
-    ['from-rose-400', 'via-orange-400', 'to-yellow-500']
-  ]
-  const hash = name.split('').reduce((acc, char) => char.charCodeAt(0) + acc, 0)
-  return colors[hash % colors.length]
-}
-
-// Vérifier si une image existe
-const imageExists = ref(new Set<string>())
-
-const checkImage = (src?: string) => {
-  if (!src) return false
-  if (imageExists.value.has(src)) return true
-  
-  const img = new Image()
-  img.onload = () => imageExists.value.add(src)
-  img.src = src
-  return imageExists.value.has(src)
-}
-</script>
