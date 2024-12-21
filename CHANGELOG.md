@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1](https://github.com/Justany/justany-website/compare/v1.2.0...v1.2.1) (2024-12-21)
+
+
+### 🐛 Corrections
+
+* add explicit permissions and pin action versions in workflows ([4bff64f](https://github.com/Justany/justany-website/commit/4bff64f0bf9cc1eb20a3a2b0f4167e52d90cd76e))
+* use semantic versioning for GitHub Actions instead of commit hashes ([ce70f89](https://github.com/Justany/justany-website/commit/ce70f89de83d0a3aeb5421e55bf9bc93b6952232))
+
+
+### 📚 Documentation
+
+* add comprehensive security policy ([5cb3e83](https://github.com/Justany/justany-website/commit/5cb3e831154ea6bf1b106b6218763d8857c892f4))
+
 ## [1.2.0](https://github.com/Justany/justany-website/compare/v1.1.2...v1.2.0) (2024-12-21)
 
 
