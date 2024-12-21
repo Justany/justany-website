@@ -4,6 +4,14 @@
 
 [![Vercel Production Deployment](https://img.shields.io/github/deployments/Justany/justany-website/Production?label=vercel&logo=vercel&logoColor=white)](https://justany.cg)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Justany/justany-website)](https://github.com/Justany/justany-website/releases)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![pnpm](https://img.shields.io/badge/pnpm-8.x-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Justany/justany-website/vercel-deploy.yml?label=CI%2FCD)](https://github.com/Justany/justany-website/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 
 ## 🌟 À propos
 
