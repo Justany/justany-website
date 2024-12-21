@@ -8,12 +8,17 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
           package-name: justany-website
@@ -29,3 +34,62 @@ jobs:
               {"type":"ci","section":"👷 CI","hidden":false},
               {"type":"chore","section":"🔧 Maintenance","hidden":true}
             ]
+
+  publish-release:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+          
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+            
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create Release Notes
+        run: |
+          echo "# 🎉 Release Notes for v${{ needs.release-please.outputs.tag_name }}" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## 🚀 Déploiement" >> RELEASE_NOTES.md
+          echo "- Production: https://justany.cg" >> RELEASE_NOTES.md
+          echo "- Preview: https://preview.justany.cg" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## 📝 Changements" >> RELEASE_NOTES.md
+          cat CHANGELOG.md >> RELEASE_NOTES.md
+
+      - name: Update Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag_name }}
+          body_path: RELEASE_NOTES.md
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

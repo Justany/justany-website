@@ -9,6 +9,10 @@ on:
   pull_request:
     branches:
       - master
+  workflow_run:
+    workflows: ["Vercel Production Deployment"]
+    types:
+      - completed
 
 # Ajout des permissions nécessaires
 permissions:
@@ -40,7 +44,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -50,34 +54,33 @@ jobs:
             
       - name: Install dependencies
         run: pnpm install
-          
-      - name: Install Vercel CLI
-        run: pnpm add -g vercel@latest
+
+      - name: Build
+        run: pnpm build
         
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-        
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-        
-      - name: Deploy Project Artifacts to Vercel
+      - name: Deploy to Vercel
         id: deploy
-        run: |
-          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
-          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-          
-      - name: Comment on PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
-        env:
-          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment_url }}
+        uses: amondnet/vercel-action@v25
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const body = `✨ Preview deployment is ready! ✨\n\nDeployed to: ${process.env.DEPLOYMENT_URL}`;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: body
-            });
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          alias-domains: |
+            preview.justany.cg
+            pr-{{PR_NUMBER}}.justany.cg
+
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            🚀 Preview déployé avec succès !
+            
+            - 🔗 URL: ${{ steps.deploy.outputs.preview-url }}
+            - 📝 Commit: ${{ github.sha }}
+            
+            Pour tester :
+            1. Vérifiez que le déploiement est bien terminé
+            2. Testez les fonctionnalités sur l'environnement de preview
+            3. Validez le bon fonctionnement de l'application
