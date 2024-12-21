@@ -42,7 +42,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 8.15.1
           run_install: false
           
       - name: Get pnpm store directory
@@ -59,7 +59,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
             
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm --version
+          pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
