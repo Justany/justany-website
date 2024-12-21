@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # Maintenir les dépendances pour npm
+  # Maintenir les dépendances pour npm 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -18,17 +18,65 @@ updates:
       prefix-development: "chore"
       include: "scope"
     groups:
+      # Groupe pour Vue et ses dépendances
       vue:
         patterns:
           - "vue*"
           - "@vue*"
+          - "@vueuse*"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Groupe pour Vite et ses plugins
       vite:
         patterns:
           - "vite*"
           - "@vitejs*"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Groupe pour TypeScript et ESLint
       typescript-eslint:
         patterns:
+          - "typescript"
           - "@typescript-eslint*"
+          - "eslint*"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Groupe pour les icônes et assets
+      icons:
+        patterns:
+          - "@fortawesome*"
+          - "*-icons"
+        update-types:
+          - "minor"
+          - "patch"
+      
+      # Groupe pour les dépendances de développement
+      dev-deps:
+        dependency-type: "development"
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "typescript"
+          - "eslint*"
+          - "@typescript-eslint*"
+        update-types:
+          - "minor"
+          - "patch"
+
+    ignore:
+      # Ignorer les mises à jour majeures pour certaines dépendances
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
 
   # Maintenir les dépendances pour GitHub Actions
   - package-ecosystem: "github-actions"
@@ -45,3 +93,10 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
+    groups:
+      actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

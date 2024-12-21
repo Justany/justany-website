@@ -1,0 +1,84 @@
+rules:
+  - name: Protect master branch
+    target:
+      - master
+    enforcement: active
+    conditions:
+      ref_name:
+        patterns: ['refs/heads/master']
+    rules:
+      - type: pull_request
+        parameters:
+          require_approval:
+            count: 1
+            users: ['Justany']
+          dismiss_stale_reviews: true
+          require_code_owner_review: true
+          require_last_push_approval: true
+          required_status_checks:
+            - 'Tests & Linting'
+            - 'CodeQL'
+            - 'SonarCloud'
+            - 'Lighthouse CI'
+            - 'Deploy-Preview'
+      - type: required_status_checks
+        parameters:
+          strict: true
+          checks:
+            - context: Tests & Linting
+            - context: CodeQL
+            - context: SonarCloud
+            - context: Lighthouse CI
+            - context: Deploy-Preview
+      - type: required_signatures
+      - type: required_linear_history
+      - type: required_deployments
+        parameters:
+          required_deployments:
+            - Production
+      - type: branch_name_pattern
+        parameters:
+          name: master
+          negate: true
+          operator: starts_with
+          pattern: temp
+      - type: commit_author_email_pattern
+        parameters:
+          pattern: '@users.noreply.github.com$'
+      - type: commit_message_pattern
+        parameters:
+          pattern: '^(feat|fix|docs|style|refactor|perf|test|chore)(\([a-z]+\))?: .+'
+          message: 'Commit messages must follow conventional commits format'
+
+  - name: Protect feature branches
+    target:
+      - 'feature/*'
+    enforcement: active
+    conditions:
+      ref_name:
+        patterns: ['refs/heads/feature/*']
+    rules:
+      - type: pull_request
+        parameters:
+          require_approval:
+            count: 1
+          dismiss_stale_reviews: true
+          require_last_push_approval: true
+          required_status_checks:
+            - 'Tests & Linting'
+            - 'Deploy-Preview'
+      - type: required_status_checks
+        parameters:
+          strict: true
+          checks:
+            - context: Tests & Linting
+            - context: Deploy-Preview
+      - type: branch_name_pattern
+        parameters:
+          name: feature/
+          operator: starts_with
+          pattern: feature/
+      - type: commit_message_pattern
+        parameters:
+          pattern: '^(feat|fix|docs|style|refactor|perf|test|chore)(\([a-z]+\))?: .+'
+          message: 'Commit messages must follow conventional commits format'
