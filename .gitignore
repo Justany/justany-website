@@ -27,3 +27,4 @@ dist-ssr
 
 # ESLint
 .eslintcache
+/public/img/*
