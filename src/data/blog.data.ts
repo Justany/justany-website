@@ -5,10 +5,14 @@ export const articles: Articles = {
     id: 1,
     image: '',
     title: 'Les meilleures pratiques pour le développement Vue.js en 2024',
+    slug: 'les-meilleures-pratiques-pour-le-dev-vuejs-en-2024',
     description: 'Un guide complet des meilleures pratiques actuelles pour développer des applications Vue.js modernes, performantes et maintenables.',
     date: '20 Dec 2024',
-    readTime: '12 min',
-    author: 'Jean Dupont',
+    readingTime: '12 min',
+    author: {
+      name: 'Jean Dupont',
+      avatar: '/images/avatars/jean-dupont.jpg'
+    },
     category: 'Frontend',
     color: 'orange',
     gradient: 'from-orange-500/20 to-orange-500/5',
@@ -211,11 +215,15 @@ describe('UserList', () => {
   '2': {
     id: 2,
     image: '',
+    slug: 'architecture-modulaire-avec-les-composables-vue',
     title: 'Architecture modulaire avec les Composables Vue',
     description: 'Découvrez comment créer une architecture modulaire et maintenable en utilisant les composables Vue et les dernières fonctionnalités de l\'écosystème Vue.',
     date: '19 Dec 2024',
-    readTime: '15 min',
-    author: 'Marie Martin',
+    readingTime: '15 min',
+    author: {
+      name: 'Marie Martin',
+      avatar: '/images/avatars/marie-martin.jpg'
+    },
     category: 'Architecture',
     color: 'blue',
     gradient: 'from-blue-500/20 to-blue-500/5',
@@ -224,7 +232,7 @@ describe('UserList', () => {
     content: [
       {
         type: 'paragraph',
-        content: 'Les composables représentent une évolution majeure dans la façon dont nous structurons nos applications Vue. Ils nous permettent de créer des abstractions réutilisables et de séparer clairement les responsabilités dans notre code.'
+        content: 'Les composables représentent une évolution majeure dans la façon dont nous structurons nos applications Vue. Ils nous permettent de créer des abstractions réutilisables et de séparer clairement les responsabilitités dans notre code.'
       },
       {
         type: 'heading',
@@ -275,10 +283,14 @@ export function useCounter(initial = 0): UseCounter {
     id: 3,
     image: '',
     title: 'Optimisation des performances Vue.js',
+    slug: 'optimisation-des-performances-vuejs',
     description: 'Guide approfondi sur l\'optimisation des performances dans les applications Vue.js, de la compilation à l\'exécution.',
     date: '18 Dec 2024',
-    readTime: '18 min',
-    author: 'Luc Bernard',
+    readingTime: '18 min',
+    author: {
+      name: 'Luc Bernard',
+      avatar: '/images/avatars/luc-bernard.jpg'
+    },
     category: 'Performance',
     color: 'zinc',
     gradient: 'from-zinc-500/20 to-zinc-500/5',

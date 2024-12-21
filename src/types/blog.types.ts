@@ -12,8 +12,13 @@ export interface Article {
   title: string;
   description: string;
   date: string;
-  readTime?: string;
-  author: string;
+  readingTime: string;
+  slug: string;
+  image?: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
   category: string;
   color: 'orange' | 'zinc' | 'blue';
   gradient?: string;
@@ -21,7 +26,6 @@ export interface Article {
   tags: string[];
   content: ContentBlock[];
   relatedArticles: number[];
-  image?: string;
 }
 
 export interface Articles {
