@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import cvImage from '@/assets/img/cv/justany-cv-ntic.png'
 </script>
 
 <template>
@@ -123,7 +124,8 @@
         <!-- CV Download Card -->
         <div class="group bg-white">
           <div class="relative rounded-2xl border border-zinc-200 p-6 hover:border-orange-500 transition-colors duration-300">
-            <div class="absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.gray.50)),var(--quick-links-hover-bg,theme(colors.gray.50)))_padding-box,linear-gradient(to_top,theme(colors.orange.400),theme(colors.orange.400),theme(colors.orange.500))_border-box]" />
+            <div
+              class="absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.gray.50)),var(--quick-links-hover-bg,theme(colors.gray.50)))_padding-box,linear-gradient(to_top,theme(colors.orange.400),theme(colors.orange.400),theme(colors.orange.500))_border-box]" />
             <div class="relative">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="font-semibold text-zinc-900">Télécharger mon CV</h3>
@@ -132,7 +134,7 @@
               <!-- Preview Image with Overlay -->
               <div class="relative h-[85.5px] overflow-hidden rounded-lg group/preview">
                 <img 
-                  src="/img/cv/justany-cv-ntic.png" 
+                  :src="cvImage" 
                   alt="Aperçu du CV" 
                   class="w-full h-full object-cover object-top"
                 />
