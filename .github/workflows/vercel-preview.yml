@@ -6,6 +6,9 @@ on:
   push:
     branches-ignore:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   Deploy-Preview:
@@ -22,9 +25,26 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
+          run_install: false
+          
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+            
+      - name: Install dependencies
+        run: pnpm install
           
       - name: Install Vercel CLI
-        run: pnpm install --global vercel@latest
+        run: pnpm add -g vercel@latest
         
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
@@ -33,4 +53,22 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
         
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        id: deploy
+        run: |
+          DEPLOYMENT_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const body = `✨ Preview deployment is ready! ✨\n\nDeployed to: ${process.env.DEPLOYMENT_URL}`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            })
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment_url }}
