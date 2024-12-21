@@ -1,12 +1,12 @@
-name: "CodeQL Analysis"
+name: "CodeQL Advanced"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [master]
   pull_request:
-    branches: [ "master" ]
+    branches: [master]
   schedule:
-    - cron: '30 1 * * 0'  # Run at 1:30 AM UTC every Sunday
+    - cron: "43 6 * * 1"
 
 permissions:
   actions: read
@@ -23,34 +23,30 @@ jobs:
       actions: read
       contents: read
       security-events: write
+      pull-requests: read
 
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript-typescript' ]
+        language: ["javascript-typescript"]
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.1
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3.23.0
+        uses: actions/checkout@v4
         with:
-          languages: ${{ matrix.language }}
-          queries: security-extended,security-and-quality
-          config-file: ./.github/codeql/codeql-config.yml
+          fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          
+          node-version: "18.20.4"
+
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.4.0
+        uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9.15.0
           run_install: false
-          
+
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -60,17 +56,28 @@ jobs:
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-20241221
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm install --no-frozen-lockfile
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+          config-file: ./.github/codeql/codeql-config.yml
 
       - name: Build
-        run: pnpm build
+        run: |
+          pnpm build
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3.23.0
+        uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: "/language:${{ matrix.language }}"
+          upload: true
+          output: sarif-results

@@ -3,24 +3,21 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
   workflow_run:
     workflows: ["Vercel Preview Deployment"]
     types:
       - completed
     branches:
       - master
-  push:
-    tags:
-      - 'v*'
-
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
   deployments: write
   statuses: write
-  checks: write
-  actions: write
 
 jobs:
   Deploy-Production:
@@ -30,19 +27,19 @@ jobs:
       github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
     environment:
       name: Production
-      url: ${{ steps.deploy.outputs.deployment_url }}
+      url: https://justany.cg
     steps:
       - uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -54,12 +51,14 @@ jobs:
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-20241221
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
             
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm --version
+          pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm build
@@ -75,3 +74,4 @@ jobs:
           vercel-args: '--prod'
           alias-domains: |
             justany.cg
+            www.justany.cg

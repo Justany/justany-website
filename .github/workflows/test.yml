@@ -2,11 +2,10 @@ name: Tests & Linting
 
 on:
   push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
+    branches-ignore:
       - master
+  pull_request:
+    branches: [ master ]
 
 permissions:
   contents: read
@@ -22,17 +21,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Important pour SonarCloud
+          fetch-depth: 0
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -49,10 +48,15 @@ jobs:
             ${{ runner.os }}-pnpm-store-
             
       - name: Install dependencies
-        run: pnpm install
-        
-      - name: Run tests with coverage
-        run: pnpm test:coverage
-        
-      - name: Run linting
+        run: |
+          pnpm --version
+          pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Run type check
+        run: pnpm type-check
+
+      - name: Run lint
         run: pnpm lint
