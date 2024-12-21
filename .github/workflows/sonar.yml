@@ -1,27 +1,19 @@
-name: SonarCloud Analysis
-
+name: SonarCloud
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
-
-permissions:
-  contents: read
-  pull-requests: read
-  checks: write
-  statuses: write
-
+    types: [opened, synchronize, reopened]
 jobs:
-  sonar:
+  sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -48,24 +40,13 @@ jobs:
             
       - name: Install dependencies
         run: |
-          pnpm --version
           pnpm install --no-frozen-lockfile
 
       - name: Run tests with coverage
         run: pnpm test:coverage
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.1.0
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=justany-website
-            -Dsonar.organization=justany
-            -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.spec.ts,src/**/*.test.ts,src/**/*.spec.tsx,src/**/*.test.tsx
-            -Dsonar.coverage.exclusions=src/**/*.test.ts,src/**/*.spec.ts,src/**/*.test.tsx,src/**/*.spec.tsx
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.qualitygate.wait=true
