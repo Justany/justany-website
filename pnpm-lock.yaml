@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fortawesome/duotone-thin-svg-icons':
-        specifier: ^6.7.1
-        version: 6.7.1
+        specifier: ^6.7.2
+        version: 6.7.2
       '@fortawesome/fontawesome-free':
         specifier: ^6.7.1
         version: 6.7.1
@@ -367,8 +367,8 @@ packages:
     resolution: {integrity: sha512-zSkKow6H5Kdm0ZUQUB2kV5JIXqoG0+uH5YADhaEHswm664N9Db8dXSi0nMJpacpMf+MyyglF1vnZohpEg5yUtg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fortawesome/duotone-thin-svg-icons@6.7.1':
-    resolution: {integrity: sha512-4fHEbXr7BwpT/DTvYNyRXy1IAFuE1Gl2g3ErDZQHsQrf6ZCyHZaQNVupe6Tmb5uxcmj4YSKfbiTaJrcC7Q69BA==}
+  '@fortawesome/duotone-thin-svg-icons@6.7.2':
+    resolution: {integrity: sha512-7nekKVnHSBNv0L/04Ter0S71ef6Ol0fyLCI3NmI23sff01abjj3n8yJcKn4kW5YKr0gO3M9S9rls2CzGP46LgQ==}
     engines: {node: '>=6'}
 
   '@fortawesome/fontawesome-common-types@6.7.1':
@@ -2182,7 +2182,7 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
-  '@fortawesome/duotone-thin-svg-icons@6.7.1': {}
+  '@fortawesome/duotone-thin-svg-icons@6.7.2': {}
 
   '@fortawesome/fontawesome-common-types@6.7.1': {}
 
