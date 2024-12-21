@@ -3,6 +3,9 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
+  push:
+    branches:
+      - master
   workflow_run:
     workflows: ["Vercel Preview Deployment"]
     types:
@@ -14,13 +17,9 @@ on:
       - 'v*'
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
   deployments: write
   statuses: write
-  checks: write
-  actions: write
 
 jobs:
   Deploy-Production:
@@ -30,19 +29,19 @@ jobs:
       github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
     environment:
       name: Production
-      url: ${{ steps.deploy.outputs.deployment_url }}
+      url: https://justany.cg
     steps:
       - uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.15.1
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -77,3 +76,4 @@ jobs:
           vercel-args: '--prod'
           alias-domains: |
             justany.cg
+            www.justany.cg

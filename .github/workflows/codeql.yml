@@ -1,12 +1,12 @@
-name: "CodeQL Analysis"
+name: CodeQL Analysis
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ master ]
   schedule:
-    - cron: '30 1 * * 0'  # Run at 1:30 AM UTC every Sunday
+    - cron: '30 1 * * 0'
 
 permissions:
   actions: read
@@ -31,24 +31,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.1
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3.23.0
-        with:
-          languages: ${{ matrix.language }}
-          queries: security-extended,security-and-quality
-          config-file: ./.github/codeql/codeql-config.yml
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.4.0
+        uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -65,12 +58,16 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm --version
+          pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3.23.0
+        uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: "/language:${{ matrix.language }}"

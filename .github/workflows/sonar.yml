@@ -1,10 +1,10 @@
 name: SonarCloud Analysis
+
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ master ]
 
 permissions:
   contents: read
@@ -13,23 +13,24 @@ permissions:
   statuses: write
 
 jobs:
-  test:
-    name: Test
+  sonar:
+    name: SonarCloud
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+      
       - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.4.0
+        uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -37,7 +38,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v4.0.0
+      - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -46,34 +47,15 @@ jobs:
             ${{ runner.os }}-pnpm-store-
             
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm --version
+          pnpm install --frozen-lockfile
 
-      - name: Test and coverage
+      - name: Run tests with coverage
         run: pnpm test:coverage
 
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage
-          path: coverage
-
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    needs: [test]  # Attend les résultats des tests
-    steps:
-      - uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
-
-      - name: Download test coverage
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage
-          path: coverage
-
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

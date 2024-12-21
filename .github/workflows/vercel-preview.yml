@@ -14,12 +14,10 @@ on:
     types:
       - completed
 
-# Ajout des permissions nécessaires
 permissions:
   contents: read
   pull-requests: write
-  issues: write
-  checks: write
+  deployments: write
   statuses: write
 
 jobs:
@@ -27,16 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.15.1
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -78,12 +78,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.20.4'
           
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8.15.1
+          version: 9.15.0
           run_install: false
           
       - name: Get pnpm store directory
@@ -117,7 +117,7 @@ jobs:
           working-directory: ./
           alias-domains: |
             preview.justany.cg
-            pr-{{PR_NUMBER}}.justany.cg
+            pr-${{ github.event.number }}.justany.cg
 
       - name: Comment PR
         if: github.event_name == 'pull_request'
