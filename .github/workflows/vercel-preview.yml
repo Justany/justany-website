@@ -3,16 +3,18 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  push:
-    branches-ignore:
-      - master
   pull_request:
     branches:
       - master
-  workflow_run:
-    workflows: ["Vercel Production Deployment"]
-    types:
-      - completed
+    paths-ignore:
+      - '.github/workflows/**'
+      - '.husky/**'
+      - '.vscode/**'
+      - 'README.md'
+      - '.gitignore'
+      - '.eslintrc'
+      - '.prettierrc'
+      - 'LICENSE'
 
 permissions:
   contents: read
@@ -36,7 +38,7 @@ jobs:
           node-version: "18.20.4"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 9.15.0
           run_install: false
@@ -68,12 +70,28 @@ jobs:
       - name: Run lint
         run: pnpm lint
 
-  Deploy-Preview:
+  Check-Deploy-Needed:
     needs: Test
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'pull_request' &&
-      !contains(github.event.pull_request.labels.*.name, 'skip-preview')
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_deploy }}
+    steps:
+      - id: check
+        run: |
+          # Skip deployment for Dependabot PRs
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          # Skip if PR has skip-preview label
+          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'skip-preview') }}" == "true" ]]; then
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          fi
+
+  Deploy-Preview:
+    needs: [Test, Check-Deploy-Needed]
+    if: needs.Check-Deploy-Needed.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
     environment:
       name: Preview
       url: ${{ steps.deploy.outputs.preview-url }}
@@ -86,7 +104,7 @@ jobs:
           node-version: "18.20.4"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 9.15.0
           run_install: false
@@ -121,11 +139,9 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: ./
           alias-domains: |
-            preview.justany.cg
             pr-${{ github.event.number }}.justany.cg
 
       - name: Comment PR
-        if: github.event_name == 'pull_request'
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
@@ -138,5 +154,3 @@ jobs:
             1. Vérifiez que le déploiement est bien terminé
             2. Testez les fonctionnalités sur l'environnement de preview
             3. Validez le bon fonctionnement de l'application
-
-            Une fois validé, le déploiement en production sera automatiquement déclenché.
