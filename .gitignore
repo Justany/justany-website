@@ -35,8 +35,5 @@ dist-ssr
 .env.local
 .env.*.local
 
-# Lock files
-pnpm-lock.yaml
-
 # Vercel
 .vercel
