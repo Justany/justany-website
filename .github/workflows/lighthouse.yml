@@ -17,15 +17,15 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: actions/checkout@v4.1.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4.1.1
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: '20'
           
       - name: Install pnpm
-        uses: pnpm/action-setup@d882d12c64e032187b2edb46d3a0d003b7a43598 # v2.4.0
+        uses: pnpm/action-setup@v2.4.0
         with:
           version: 8
           run_install: false
@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      - uses: actions/cache@v4.0.0
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -50,7 +50,7 @@ jobs:
         run: pnpm build
         
       - name: Run Lighthouse CI
-        uses: treosh/lighthouse-ci-action@e0fe113967eee84b631d526e7510c357b33c0034 # v10.1.0
+        uses: treosh/lighthouse-ci-action@v10.1.0
         with:
           configPath: './lighthouse.config.js'
           uploadArtifacts: true
