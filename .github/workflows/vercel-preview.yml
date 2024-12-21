@@ -71,6 +71,9 @@ jobs:
   Deploy-Preview:
     needs: Test
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      !contains(github.event.pull_request.labels.*.name, 'skip-preview')
     environment:
       name: Preview
       url: ${{ steps.deploy.outputs.preview-url }}
