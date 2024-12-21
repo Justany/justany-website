@@ -6,16 +6,14 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'v*'
   workflow_run:
     workflows: ["Vercel Preview Deployment"]
     types:
       - completed
     branches:
       - master
-  push:
-    tags:
-      - 'v*'
-
 permissions:
   contents: read
   deployments: write
@@ -53,7 +51,7 @@ jobs:
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-20241221
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
             

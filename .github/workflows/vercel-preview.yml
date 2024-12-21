@@ -17,6 +17,8 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
+  checks: write
   deployments: write
   statuses: write
 
@@ -27,18 +29,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.20.4'
-          
+          node-version: "18.20.4"
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9.15.0
           run_install: false
-          
+
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -51,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-            
+
       - name: Install dependencies
         run: |
           pnpm --version
@@ -59,10 +61,10 @@ jobs:
 
       - name: Run tests
         run: pnpm test
-        
+
       - name: Run type check
         run: pnpm type-check
-        
+
       - name: Run lint
         run: pnpm lint
 
@@ -74,18 +76,18 @@ jobs:
       url: ${{ steps.deploy.outputs.preview-url }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.20.4'
-          
+          node-version: "18.20.4"
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9.15.0
           run_install: false
-          
+
       - name: Get pnpm store directory
         shell: bash
         run: |
@@ -98,7 +100,7 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-            
+
       - name: Install dependencies
         run: |
           pnpm --version
@@ -106,7 +108,7 @@ jobs:
 
       - name: Build
         run: pnpm build
-        
+
       - name: Deploy to Vercel
         id: deploy
         uses: amondnet/vercel-action@v25
@@ -125,13 +127,13 @@ jobs:
         with:
           message: |
             🚀 Preview déployé avec succès !
-            
+
             - 🔗 URL: ${{ steps.deploy.outputs.preview-url }}
             - 📝 Commit: ${{ github.sha }}
-            
+
             Pour tester :
             1. Vérifiez que le déploiement est bien terminé
             2. Testez les fonctionnalités sur l'environnement de preview
             3. Validez le bon fonctionnement de l'application
-            
+
             Une fois validé, le déploiement en production sera automatiquement déclenché.
