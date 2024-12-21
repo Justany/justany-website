@@ -1,0 +1,62 @@
+name: ✨ Demande de fonctionnalité
+description: Suggérer une idée pour ce projet
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de prendre le temps de remplir cette demande de fonctionnalité !
+  
+  - type: textarea
+    id: problem
+    attributes:
+      label: Le problème
+      description: Votre demande est-elle liée à un problème ? Décrivez-le.
+      placeholder: Je suis toujours frustré quand [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution souhaitée
+      description: Décrivez la solution que vous aimeriez
+      placeholder: J'aimerais voir [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considérées
+      description: Décrivez les alternatives que vous avez envisagées
+      placeholder: J'ai pensé à [...]
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorité
+      description: Quelle est la priorité de cette fonctionnalité selon vous ?
+      options:
+        - Critique (Bloque l'utilisation)
+        - Haute (Amélioration majeure)
+        - Moyenne (Nice to have)
+        - Basse (Cosmétique)
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte additionnel
+      description: Ajoutez tout autre contexte ou captures d'écran ici
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code de conduite
+      description: En soumettant cette demande, vous acceptez de suivre notre code de conduite
+      options:
+        - label: J'accepte de suivre le code de conduite de ce projet
+          required: true

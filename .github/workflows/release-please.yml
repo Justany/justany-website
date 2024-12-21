@@ -1,0 +1,31 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: node
+          package-name: justany-website
+          changelog-types: |
+            [
+              {"type":"feat","section":"✨ Fonctionnalités","hidden":false},
+              {"type":"fix","section":"🐛 Corrections","hidden":false},
+              {"type":"docs","section":"📚 Documentation","hidden":false},
+              {"type":"style","section":"💄 Style","hidden":false},
+              {"type":"refactor","section":"♻️ Refactoring","hidden":false},
+              {"type":"perf","section":"⚡️ Performance","hidden":false},
+              {"type":"test","section":"✅ Tests","hidden":false},
+              {"type":"ci","section":"👷 CI","hidden":false},
+              {"type":"chore","section":"🔧 Maintenance","hidden":true}
+            ]
