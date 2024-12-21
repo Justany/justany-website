@@ -19,39 +19,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4.0.1
+      - name: Wait for Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: waitFor
         with:
-          node-version: '20'
-          
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          version: 8
-          run_install: false
-          
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 300
 
-      - uses: actions/cache@v4.0.0
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-            
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build project
-        run: pnpm build
-        
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v9.3.1
         with:
+          urls: |
+            ${{ steps.waitFor.outputs.url }}
           configPath: './lighthouse.config.js'
           uploadArtifacts: true
           temporaryPublicStorage: true

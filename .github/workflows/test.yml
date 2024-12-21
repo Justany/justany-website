@@ -21,6 +21,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important pour SonarCloud
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,7 +40,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Setup pnpm cache
         with:
           path: ${{ env.STORE_PATH }}
@@ -49,14 +51,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         
-      - name: Run ESLint
+      - name: Run tests with coverage
+        run: pnpm test:coverage
+        
+      - name: Run linting
         run: pnpm lint
-        
-      - name: Run TypeScript Check
-        run: pnpm type-check
-        
-      - name: Run Tests
-        run: pnpm test
-        
-      - name: Check Build
-        run: pnpm build

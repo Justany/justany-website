@@ -13,8 +13,8 @@ permissions:
   statuses: write
 
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.1
@@ -51,8 +51,38 @@ jobs:
       - name: Test and coverage
         run: pnpm test:coverage
 
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    needs: [test]  # Attend les résultats des tests
+    steps:
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      - name: Download test coverage
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.projectKey=justany-website
+            -Dsonar.organization=justany
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=src/**/*.spec.ts,src/**/*.test.ts,src/**/*.spec.tsx,src/**/*.test.tsx
+            -Dsonar.coverage.exclusions=src/**/*.test.ts,src/**/*.spec.ts,src/**/*.test.tsx,src/**/*.spec.tsx
