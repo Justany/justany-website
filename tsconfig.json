@@ -34,7 +34,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "vite.config.ts"
+    "vite.config.ts",
+    "types.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

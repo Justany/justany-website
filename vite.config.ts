@@ -55,7 +55,7 @@ export default defineConfig({
     include: ['vue', 'vue-router', 'pinia']
   },
   server: {
-    port: 3000,
+    port: 5173,
     host: true
   }
 })
