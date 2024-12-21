@@ -63,6 +63,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Run tests and linting
+        run: |
+          pnpm type-check
+          pnpm lint:check
+          pnpm test
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3.23.0
 
