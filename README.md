@@ -1,53 +1,73 @@
-# Justany Website
+# Justany Website 🚀
 
-Personal website built with Vue 3, Vite, and TypeScript.
+> Portfolio personnel et blog professionnel construit avec Vue 3, Vite, et TypeScript.
 
-## Features
+[![Vercel Production Deployment](https://img.shields.io/github/deployments/Justany/justany-website/Production?label=vercel&logo=vercel&logoColor=white)](https://justany.cg)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Justany/justany-website)](https://github.com/Justany/justany-website/releases)
 
-- Vue 3 with Composition API
-- TypeScript support
-- Vite for fast development and building
-- Tailwind CSS for styling
-- Vercel deployment with GitHub Actions
-- Image optimization
-- Analytics and Speed Insights
-- Automatic preview deployments
-- Production deployments with release notes
+## 🌟 À propos
 
-## Development
+Site web personnel présentant mon portfolio, mon blog et mes services de développement web. Construit avec les dernières technologies web pour une expérience utilisateur optimale.
+
+## ✨ Fonctionnalités
+
+- Vue 3 avec Composition API
+- TypeScript pour un code robuste
+- Vite pour un développement rapide
+- Tailwind CSS pour un design moderne
+- Déploiement automatisé sur Vercel
+- Optimisation des images
+- Analytics et Speed Insights
+- Déploiements de preview automatiques
+- Déploiements de production avec notes de version
+
+## 🚀 Développement
 
 ```bash
-# Install dependencies
+# Installation des dépendances
 pnpm install
 
-# Start development server
+# Démarrage du serveur de développement
 pnpm dev
 
-# Build for production
+# Build pour la production
 pnpm build
 
-# Preview production build
+# Preview du build de production
 pnpm preview
 ```
 
-## Deployment
+## 📦 Déploiement
 
-The site is automatically deployed to Vercel through GitHub Actions:
-- Production deployments on push to `master` and tags
-- Preview deployments for all other branches and pull requests
-- Automatic GitHub releases for tagged versions
+Le site est automatiquement déployé sur Vercel via GitHub Actions :
+- Déploiements de production sur push vers `master` et tags
+- Déploiements de preview pour les autres branches et pull requests
+- Releases GitHub automatiques pour les versions taggées
 
-## Environment Variables
+## 🔑 Variables d'Environnement
 
-Required environment variables:
-- `VERCEL_TOKEN` - Vercel API token
-- `VERCEL_ORG_ID` - Vercel organization ID
-- `VERCEL_PROJECT_ID` - Vercel project ID
+Variables d'environnement requises :
+- `VERCEL_TOKEN` - Token API Vercel
+- `VERCEL_ORG_ID` - ID de l'organisation Vercel
+- `VERCEL_PROJECT_ID` - ID du projet Vercel
 
-## CI/CD
+## 🔄 CI/CD
 
-This project uses GitHub Actions for continuous integration and deployment:
-- Automated testing and linting
-- Preview deployments for pull requests
-- Production deployments for master branch
-- Automatic releases for tags
+Ce projet utilise GitHub Actions pour l'intégration et le déploiement continus :
+- Tests et linting automatisés
+- Déploiements de preview pour les pull requests
+- Déploiements de production pour la branche master
+- Releases automatiques pour les tags
+
+## 📚 Documentation
+
+- [Guide de Déploiement](./DEPLOYMENT.md)
+- [Notes de Version](./RELEASE_NOTES.md)
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! Consultez notre [guide de contribution](./CONTRIBUTING.md) pour commencer.
+
+## 📝 Licence
+
+MIT © [Justany]
