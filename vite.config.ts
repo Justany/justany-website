@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
-import path from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,8 +27,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
   build: {
     cssMinify: true,
@@ -36,26 +36,54 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': [
-            'vue',
-            'vue-router',
-            'pinia',
-            '@fortawesome/fontawesome-svg-core',
-            '@fortawesome/free-solid-svg-icons',
-            '@fortawesome/free-brands-svg-icons',
-            '@fortawesome/vue-fontawesome'
+          vendor: [
+            "vue",
+            "vue-router",
+            "pinia",
+            "@fortawesome/fontawesome-svg-core",
+            "@fortawesome/free-solid-svg-icons",
+            "@fortawesome/free-brands-svg-icons",
+            "@fortawesome/vue-fontawesome",
           ],
-          'styles': ['./src/style.css']
-        }
-      }
+          styles: ["./src/style.css"],
+        },
+      },
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: ['vue', 'vue-router', 'pinia']
+    include: ["vue", "vue-router", "pinia"],
   },
   server: {
     port: 5173,
-    host: true
-  }
-})
+    host: true,
+    proxy: {
+      "/api/microlink": {
+        target: "https://api.microlink.io",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/microlink/, ""),
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        configure: (proxy, options) => {
+          proxy.on("error", (err, req, res) => {
+            console.log("proxy error", err);
+          });
+          proxy.on("proxyReq", (proxyReq, req, res) => {
+            console.log(
+              "Sending Request to the Target:",
+              proxyReq.method,
+              proxyReq.path
+            );
+          });
+          proxy.on("proxyRes", (proxyRes, req, res) => {
+            console.log(
+              "Received Response from the Target:",
+              proxyRes.statusCode
+            );
+          });
+        },
+      },
+    },
+  },
+});
