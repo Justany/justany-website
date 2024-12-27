@@ -2,9 +2,9 @@ import type { Project } from "@/types/project";
 
 // Images data
 export const logosImages = {
-  fournisseurNormal: "./img/logos/F logo 512 x 512 px normal.png",
-  fournisseur: "./img/logos/F logo 512 x 512 px.png",
-  colorful: "./img/logos/colorful - logo.png",
+  fournisseurNormal: "./img/logos/f-logo-normal.png",
+  fournisseur: "./img/logos/f-logo.png",
+  colorful: "./img/logos/colorful-logo.png",
 };
 
 export const creasImages = {
@@ -172,7 +172,16 @@ export const webProjectContent = {
   client: {
     name: "ModeShop Inc",
     industry: "Mode & Retail",
-    logo: "/images/clients/modeshop-logo.png",
+    size: "50-100 employés",
+    location: "Paris, France",
+    yearFounded: 2015,
+    website: "https://justany.cg",
+    logo: "./img/logos/colorful-logo.png",
+    contact: {
+      name: "Jean Dupont",
+      role: "Directeur Digital",
+      email: "jean.dupont@modeshop.com",
+    },
   },
   mainCategory: "Web",
   description:
@@ -325,6 +334,138 @@ export const webProjectContent = {
       planned: "Q4 2024",
     },
   ],
+
+  metrics: {
+    roi: "350%",
+    timeToMarket: "16 sem.",
+    userBase: "15 000+ Us",
+    monthlyRevenue: "45,000 €",
+    conversionRate: "3.5%",
+    customerSatisfaction: "4.8/5",
+    performanceStats: {
+      pageLoadTime: "1.8s",
+      uptime: "99.99%",
+      errorRate: "0.1%",
+      mobileUsage: "65%",
+    },
+  },
+
+  technicalDetails: {
+    architecture: "Microservices",
+    hosting: "AWS",
+    security: {
+      authentication: "OAuth 2.0 + JWT",
+      encryption: "AES-256",
+      compliance: ["GDPR", "PCI DSS"],
+    },
+    testing: {
+      coverage: "92%",
+      tools: ["Jest", "Cypress", "Lighthouse"],
+      types: ["Unit", "Integration", "E2E"],
+    },
+    monitoring: {
+      tools: ["New Relic", "Sentry", "DataDog"],
+      metrics: ["Uptime", "Error rates", "User sessions"],
+    },
+  },
+
+  developmentProcess: {
+    methodology: "Agile Scrum",
+    sprintDuration: "2 semaines",
+    totalSprints: 8,
+    keyMilestones: [
+      {
+        name: "Discovery & Planning",
+        duration: "2 semaines",
+        deliverables: ["Specifications", "Wireframes", "Tech Stack Selection"],
+        status: "done",
+      },
+      {
+        name: "MVP Development",
+        duration: "6 semaines",
+        deliverables: ["Core Features", "Basic UI", "Payment Integration"],
+        status: "process",
+      },
+      {
+        name: "Testing & Optimization",
+        duration: "4 semaines",
+        deliverables: [
+          "QA Reports",
+          "Performance Optimization",
+          "Security Audit",
+        ],
+        status: "planned",
+      },
+      {
+        name: "Launch & Support",
+        duration: "4 semaines",
+        deliverables: ["Deployment", "Documentation", "Training"],
+        status: "proposal",
+      },
+    ],
+  },
+
+  businessImpact: {
+    beforeLaunch: {
+      revenue: "15,000 €/mois",
+      customers: 500,
+      marketShare: "2%",
+    },
+    afterLaunch: {
+      revenue: "45,000 €/mois",
+      customers: 1500,
+      marketShare: "6%",
+    },
+    improvements: [
+      {
+        metric: "Satisfaction client",
+        before: "3.2/5",
+        after: "4.8/5",
+        impact: "+50%",
+      },
+      {
+        metric: "Temps de traitement des commandes",
+        before: "48h",
+        after: "4h",
+        impact: "-92%",
+      },
+    ],
+  },
+
+  maintenance: {
+    sla: {
+      uptime: "99.99%",
+      responseTime: "< 1h",
+      resolutionTime: "< 24h",
+    },
+    updates: {
+      frequency: "Bi-mensuel",
+      type: ["Sécurité", "Features", "Performance"],
+    },
+    support: {
+      channels: ["Email", "Phone", "Chat"],
+      availability: "24/7",
+      languages: ["Français", "Anglais"],
+    },
+  },
+
+  resources: {
+    documentation: {
+      technical: "/docs/technical-spec.pdf",
+      user: "/docs/user-manual.pdf",
+      api: "/docs/api-reference.pdf",
+    },
+    training: {
+      materials: "/training/modules",
+      videos: "/training/videos",
+      workshops: ["Admin", "User", "Developer"],
+    },
+    assets: {
+      logos: "/assets/logos",
+      screenshots: "/assets/screenshots",
+      presentations: "/assets/presentations",
+    },
+  },
 };
 
 // Export all projects combined

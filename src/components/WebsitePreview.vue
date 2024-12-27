@@ -204,7 +204,7 @@ onMounted(fetchPreview)
                         <div class="flex flex-col items-center">
                             <!-- Circular Progress -->
                             <div class="relative w-24 h-24">
-                                {{ }}
+
                                 <svg class="w-full h-full" viewBox="0 0 36 36">
                                     <!-- Background circle -->
                                     <circle cx="18" cy="18" r="16" fill="none" class="stroke-current"
