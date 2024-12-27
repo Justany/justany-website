@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { services } from '@/data/services.datas'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const getGradientStyle = (color: string) => {
   const colors = {
@@ -31,6 +34,10 @@ const scrollToPricing = () => {
     pricingSection.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const navigateToProject = (id: number) => {
+  router.push({ name: 'project-content', params: { id: id.toString() } })
+}
 </script>
 
 <template>
@@ -38,28 +45,29 @@ const scrollToPricing = () => {
     <div class="max-w-7xl mx-auto">
       <!-- Section Header -->
       <div class="text-center md:text-left mb-16">
-        <h2 class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-200 inline-block text-transparent bg-clip-text">
+        <h2
+          class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-200 inline-block text-transparent bg-clip-text">
           Expertise & Services
         </h2>
-        <p class="mt-4 text-zinc-400 max-w-2xl">Des solutions innovantes et sur mesure pour tous vos projets digitaux</p>
+        <p class="mt-4 text-zinc-400 max-w-2xl">Des solutions innovantes et sur mesure pour tous vos projets digitaux
+        </p>
       </div>
 
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <div v-for="service in services" :id="service.title.toLowerCase().replace(/ /g, '-')"
-          :key="service.id"
+        <div v-for="service in services" :id="service.title.toLowerCase().replace(/ /g, '-')" :key="service.id"
           class="group relative p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-opacity-50 transition-all duration-300 overflow-hidden cursor-pointer"
-          @click="scrollToPricing">
+          @click="navigateToProject(service.id)">
           <!-- Gradient Background -->
-          <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          <div
+            class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             :class="getGradientStyle(service.color)"></div>
 
           <!-- Content -->
           <div class="relative z-10">
             <!-- Icon -->
             <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300"
-              :class="getIconBgColor(service.color)"
-              v-html="service.icon">
+              :class="getIconBgColor(service.color)" v-html="service.icon">
             </div>
 
             <!-- Title & Description -->
@@ -80,12 +88,13 @@ const scrollToPricing = () => {
             </ul>
 
             <!-- CTA Button -->
-            <button 
+            <button
               class="mt-6 w-full py-2 px-4 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-opacity-80 transition-colors flex items-center justify-center group-hover:bg-opacity-100"
-              :class="'group-hover:bg-' + service.color + '-500 group-hover:text-white'"
-            >
+              :class="'group-hover:bg-' + service.color + '-500 group-hover:text-white'">
               Voir les tarifs
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
